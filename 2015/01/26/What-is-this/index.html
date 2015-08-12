@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="作用域和闭包相信接触过编程的人，大多都是知道作用域的，像下面两个关于全局变量和本地变量的例子：
+1//&amp;#23450;&amp;#20041;&amp;#20840;&amp;#23616;&amp;#21464;&amp;#37327;&amp;#10;var name = &amp;#34;Minary&amp;#34;;&amp;#10;var age = 21;">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What is &quot;this&quot;? | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "2015/01/26/What-is-this/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>What is "this"?</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2015-01-26T06:14:46.000Z" itemprop="datePublished">2015年01月26日</time>,
+更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
+By <a href="http://f10.moe" title="Minary">Minary</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域和闭包"><span class="toc-number">1.</span> <span class="toc-text">作用域和闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-number">2.</span> <span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#驯服_this"><span class="toc-number">3.</span> <span class="toc-text">驯服 this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定_“this”"><span class="toc-number">4.</span> <span class="toc-text">绑定 “this”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">5.</span> <span class="toc-text">link</span></a></li></ol>
+            </div>
+            
+            <h3 id="作用域和闭包">作用域和闭包</h3><p>相信接触过编程的人，大多都是知道作用域的，像下面两个关于全局变量和本地变量的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23450;&#20041;&#20840;&#23616;&#21464;&#37327;&#10;var name = &#34;Minary&#34;;&#10;var age = 21;&#10;console.log(&#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;);</span><br></pre></td></tr></table></figure>
+<p>上面输出： Hello Minary.  Wow, you are 21 years old.</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23450;&#20041;&#26412;&#22320;&#21464;&#37327;&#10;function newScope() &#123;&#10;  var name = &#34;Minary&#34;;&#10;  var age = 21;&#10;&#125;&#10;console.log(&#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;);</span><br></pre></td></tr></table></figure>
+<p>上面的例子会报 name is not defined 的错误。因为尝试从全局范围中获取本地变量。</p>
+<hr>
+<p><strong>作用域是闭包实现的关键</strong>，下面是 wiki 对闭包和作用域的解释：</p>
+<blockquote>
+<p>In computer science, a closure is a first-class function with free variables that are bound in the lexical environment. Such a function is said to be “closed over” its free variables. A closure is defined within the scope of its free variables, and the extent of those variables is at least as long as the lifetime of the closure itself.</p>
+</blockquote>
+<p>什么意思呢？ 可以看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = &#34;outer&#34;;&#10;function one() &#123;&#10;  var name = &#34;middle&#34;;&#10;  var other = &#34;findme&#34;;&#10;  function two() &#123;&#10;    var name = &#34;inner&#34;;&#10;    // &#36825;&#37324; `name` &#20026; &#34;inner&#34; &#65292;`other` &#20026; &#34;findme&#34;&#10;    console.dir(&#123;name: name, other: other&#125;);&#10;  &#125;&#10;  two();&#10;  // &#36825;&#37324; `name` &#20026; &#34;middle&#34; &#65292;`other` &#20026; &#34;findme&#34;&#10;  console.dir(&#123;name: name, other: other&#125;);&#10;&#125;&#10;one();&#10;// &#36825;&#37324; `name` &#20026; &#34;outer&#34; &#65292;`other` &#20026; undefined.&#10;console.dir(&#123;name: name&#125;);&#10;console.dir(&#123;other: other&#125;);</span><br></pre></td></tr></table></figure>
+<p>也就是说本地作用域可以访问全局变量， 但是全局作用域不可以访问本地变量。 本地变量可以重新定义一个和全局变量一样名字的变量， 这时候再在本地作用域内访问像上面 <code>name</code> 一样的变量时，全局的 <code>name</code> 被本地覆盖。 但是出了这个本地作用域， 全局变量仍未改变。</p>
+<hr>
+<p>那么要怎么访问本地作用域里的变量呢？看下面这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#26032;&#24314;&#19968;&#20010;&#20989;&#25968;&#24182; return &#19968;&#20010;&#38381;&#21253;&#20989;&#25968;&#10;function myModule() &#123;&#10;  var name = &#34;Minary&#34;, age = 21;&#10;  return function greet() &#123;&#10;    return &#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;;&#10;  &#125;&#10;&#125;&#10;// call `myModule` to get a closure out of it.&#10;var greeter = myModule();&#10;// Call the closure&#10;greeter();</span><br></pre></td></tr></table></figure>
+<p><code>name</code> 和 <code>age</code> 变量是 <code>MyModule</code> 函数里的本地变量， 但是我们在全局作用域里通过执行 <code>greeter</code> 来访问，就不会报错。<br>这是因为 <code>greet</code> 函数的作用域里本来就有 <code>name</code> 和 <code>age</code> 这两个变量，所以直接访问不会报错。<br>基本上变量都是从它的作用域里获取所请求的变量。</p>
+<h3 id="this">this</h3><p>除了作用域，JavaScript 增加了另一层特殊的作用域，通过特殊的关键字 <code>this</code> 来实现。这个关键字的用法除了不能被修改，其他看起来和普通的变量一样。<br>它作为一个对象，你可以通过正常点或括号，得到它的属性。神奇的是， <code>this</code> 的值取决于调用它的情况。一般情况下，它的值就是接收到的信息。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Person = &#123;&#10;  name: &#34;Minary&#34;,&#10;  age: 21,&#10;  greeting: function () &#123;&#10;    return &#34;Hello &#34; + this.name + &#34;.  Wow, you are &#34; + this.age + &#34; years old.&#34;;&#10;  &#125;&#10;&#125;;&#10;&#10;Person.greeting(); //&#39;Hello Minary.  Wow, you are 21 years old.&#39;</span><br></pre></td></tr></table></figure>
+<p>上面的代码看起来 <code>this</code> 几乎像其他语言中的对象, 这说明被他骗了。作为这个 <code>Person</code> 对象的创造者， 你没有把握 <code>this</code> 会和 <code>Person</code> 一样， 比方说, 想在把 <code>greeting</code> 函数把保存在其他地方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var greeting = Person.greeting;&#10;greeting(); // &#39;Hello undefined.  Wow, you are undefined years old.&#39;</span><br></pre></td></tr></table></figure>
+<p><code>this.name</code> 和 <code>this.age</code> 就会为 <code>undefined</code>， 这是因为在 <code>greeting</code> 函数现在在全局对象里， 而不是 <code>Person</code> 对象里。 因此这里的 <code>this.name</code> 和 <code>this.age</code> 是在全局范围里找, 所以是找不到的。</p>
+<p>所以下面这个例子就可以了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Dog = &#123;&#10;  name: &#34;Dog&#34;,&#10;  age: 2,&#10;  greeting: Person.greeting&#10;&#125;&#10;&#10;Dog.greeting(); // &#39;Hello Dog.  Wow, you are 2 years old.&#39;</span><br></pre></td></tr></table></figure>
+<p>因为这时候 this 会在 <code>Dog</code> 作用域里找。</p>
+<h3 id="驯服_this">驯服 this</h3><p>先看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Alien = &#123;&#10;  name: &#34;Zygoff&#34;,&#10;  age: 5432&#10;&#125;&#10;&#10;Person.greeting.call(Alien); // &#39;Hello Zygoff.  Wow, you are 5432 years old.&#39;</span><br></pre></td></tr></table></figure>
+<p>对比一下之前的例子， 上面这个 <code>Alien</code> 对象里没有半句关于 <code>greeting</code> 函数， 但是我们仍旧可以使用它。<br>这是因为我们 <code>call</code> 了 <code>Person.greeting</code> 函数， 但是却把 <code>Alicn</code> 的值作为 <code>this</code> 注入。<br>我们还可以用 <code>apply</code> ，用法和上面的例子类似在没有额外的参数下。</p>
+<hr>
+<p>让我们写个类函数可以被其他包含有 <code>name</code> 和 <code>age</code> 的对象使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function makeOlder(years, newname) &#123;&#10;  this.age += years;&#10;  if (newname) &#123;&#10;    this.name = newname;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以通过 call 或者 apply 来调用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makeOlder.call(Person, 2, &#34;Old Tim&#34;);&#10;makeOlder.apply(Dog, [1, &#34;Shaggy&#34;]);&#10;console.dir(&#123;Person: Person, Dog: Dog&#125;); //&#123; Person: &#123; name: &#39;Old Tim&#39;, age: 30, greeting: [Function] &#125;,Dog: &#123; name: &#39;Shaggy&#39;, age: 111, greeting: [Function] &#125; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="绑定_“this”">绑定 “this”</h3><p>有时候我们更喜欢OPP风格的代码并想让JS也这样做。 我们并不喜欢 <code>this</code> 的改变取决于调用的时间。下面一个jQuery的简单例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cart = &#123;&#10;  items: [1,4,2],&#10;  onClick: function () &#123;&#10;    // Do something with this.items.&#10;  &#125;&#10;&#125;&#10;$(&#34;#mybutton&#34;).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
+<p>虽然上面的看起来不错，其实有个大坑等着你。 尽管已经有了 <code>Cart.onClick</code> ，我们先不调用它。 jQuery代码将接受的是一些参数，在这一点上它没有办法知道 <code>onClick</code> 是来自 <code>Cart</code> 的对象。你的 <code>this</code> 最后并不会像你期望的那样被called。</p>
+<p>结合之前的闭包和作用域的知识让这个 <code>this</code> 就像它在大多数面向对象的语言那样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#mybutton&#34;).click(function () &#123; Cart.onClick() &#125;);</span><br></pre></td></tr></table></figure>
+<p>我们创建了一个闭包然后调用 <code>Cart.onClick()</code> ， 现在没有任何的参数和返回值， 可以改成下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#mybutton&#34;).click(function () &#123; return Cart.onClick.apply(Cart, arguments) &#125;);</span><br></pre></td></tr></table></figure>
+<p>现在已经成功了，但是如果你不知道 <code>arguments</code> 是另一个关键字（一个类似数组的对象包含了当前最内部函数的参数<br>）代码就会变得难度难懂。</p>
+<p>如果 <code>Cart</code> 是个全局访问的单个对象，我们可以只使用变量 <code>Cart</code> 而不是依靠 <code>this</code> 。 但往往并不会这样，当你有“类”的对象共享的功能。</p>
+<p>可以按下面那样修改 <code>Cart.onClick</code> 来使这个 <code>this</code> 一直在 <code>Cart</code> 里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function bind(fn, scope) &#123;&#10;  return function () &#123;&#10;    return fn.apply(scope, arguments);&#10;  &#125;&#10;&#125;&#10;Cart.onClick = bind(Cart.onClick, Cart);&#10;$(&#34;#mybutton&#34;).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
+<p>这里有很多种方式都能实现这样的效果，事实上他不是最好的解决方法。在上面，我们创建了一个闭包并把范围嵌在里面， 然后我们通过绑定闭包和使用 <code>apply</code> 自动传入参数并且自动返回值来替换 <code>Cart.onClick</code> 。</p>
+<h3 id="link">link</h3><p><a href="http://howtonode.org/what-is-this" target="_blank" rel="external">http://howtonode.org/what-is-this</a></p>
+
+            
+            <section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"f10"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>

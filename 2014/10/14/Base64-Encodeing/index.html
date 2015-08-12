@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="Description:题目链接
+Extend the String object to create a function that converts the value of the String to and from Base64 using the ASCII character set.">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Codewars# Base64 Encodeing | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "2014/10/14/Base64-Encodeing/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>Codewars# Base64 Encodeing</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2014-10-14T05:03:55.000Z" itemprop="datePublished">2014年10月14日</time>,
+更新于:<time datetime="2015-06-08T07:50:09.000Z" itemprop="dateModified">2015年06月08日</time>,
+By <a href="http://f10.moe" title="Minary">Minary</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Description:"><span class="toc-number">1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Usage:"><span class="toc-number">2.</span> <span class="toc-text">Usage:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solutions:"><span class="toc-number">3.</span> <span class="toc-text">Solutions:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#About"><span class="toc-number">4.</span> <span class="toc-text">About</span></a></li></ol>
+            </div>
+            
+            <h2 id="Description:">Description:</h2><p><a href="http://www.codewars.com/kata/5270f22f862516c686000161" target="_blank" rel="external">题目链接</a></p>
+<p>Extend the String object to create a function that converts the value of the String to and from Base64 using the ASCII character set.</p>
+<hr>
+<h2 id="Usage:">Usage:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// should return &#39;dGhpcyBpcyBhIHN0cmluZyEh&#39;&#10;&#39;this is a string!!&#39;.toBase64(); &#10;&#10;// should return &#39;this is a string!!&#39;&#10;&#39;dGhpcyBpcyBhIHN0cmluZyEh&#39;.fromBase64();</span><br></pre></td></tr></table></figure>
+<p>You can learn more about Base64 encoding and decoding <a href="http://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">here</a>.</p>
+<hr>
+<h2 id="Solutions:">Solutions:</h2><p>从wiki里可以看出，字符串到base64的转换步骤有四步：</p>
+<ol>
+<li>将字符转化成ASCII （取三个字符）</li>
+<li>将这三个ASCII转换成二进制（8位）</li>
+<li>将这三个二进制（3 × 8 位）转换成四个二进制（4 × 6位）</li>
+<li>根据这四个二进制去 <em>Base64 encoding</em> 表读取对应的位置的字符</li>
+</ol>
+<p>嘛嘛！语言组织的不是很理想，可以直接<a href="http://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">戳这里</a>.</p>
+<hr>
+<p><strong>用现有的方法可以直接用下面的代码实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;String.prototype.toBase64 = function() &#123;&#10;  return new Buffer(this.toString()).toString(&#39;base64&#39;);&#10;&#125;&#10;&#10;String.prototype.fromBase64 = function() &#123;&#10;  return new Buffer(this.toString(), &#39;base64&#39;).toString();&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>具体实现</strong></p>
+<p>找了个讨论里面最推荐的方法， 具体实现都是大同小异。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.prototype.toBase64 = function() &#123;&#10;  var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;;&#10;  var encoded = &#39;&#39;;&#10;  &#10;  for(var i=0; i &#60; this.length; i+=3) &#123;&#10;    var c1 = this.charCodeAt(i), &#10;        c2 = this.charCodeAt(i+1), &#10;        c3 = this.charCodeAt(i+2);&#10;    encoded += chars[(c1 &#38; 0xFC) &#62;&#62; 2];&#10;    encoded += chars[((c1 &#38; 0x03) &#60;&#60; 4) | ((c2 &#38; 0xF0) &#62;&#62; 4)];&#10;    encoded += chars[((c2 &#38; 0x0F) &#60;&#60; 2) | ((c3 &#38; 0xC0) &#62;&#62; 6)];&#10;    encoded += chars[c3 &#38; 0x3F];&#10;  &#125;&#10;  &#10;  return encoded;&#10;&#125;;&#10;&#10;String.prototype.fromBase64 = function() &#123;&#10;  var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;;&#10;  var decoded = &#39;&#39;;&#10;  &#10;  for(var i=0; i &#60; this.length; i+=4) &#123;&#10;    var c1 = chars.indexOf(this[i]), &#10;        c2 = chars.indexOf(this[i+1]), &#10;        c3 = chars.indexOf(this[i+2]),&#10;        c4 = chars.indexOf(this[i+3]);&#10;    decoded += String.fromCharCode(((c1) &#60;&#60; 2) | ((c2 &#38; 0x30) &#62;&#62; 4));&#10;    decoded += String.fromCharCode(((c2 &#38; 0x0F) &#60;&#60; 4) | ((c3 &#38; 0xFC) &#62;&#62; 2));&#10;    decoded += String.fromCharCode(((c3 &#38; 0x03) &#60;&#60; 6) | c4);&#10;  &#125;&#10;  &#10;  return decoded;&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>解释上面的代码：</strong></p>
+<ol>
+<li><p>Base64 cording 表：</p>
+<pre><code><span class="keyword">var</span> chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span>;
+</code></pre></li>
+<li><p>这段代码的意思是取出三个字符，并将他们转换成ASCII码：</p>
+<pre><code>var c<span class="number">1</span> = this.charCodeAt<span class="comment">(i)</span>, 
+c<span class="number">2</span> = this.charCodeAt<span class="comment">(i+1)</span>, 
+c<span class="number">3</span> = this.charCodeAt<span class="comment">(i+2)</span>;
+</code></pre></li>
+<li><p>字符处理：</p>
+<pre><code>encoded += chars[<span class="params">(c1 &amp; <span class="number">0</span>xFC)</span> &gt;&gt; <span class="number">2</span>];
+encoded += chars[<span class="params">(<span class="params">(c1 &amp; <span class="number">0</span>x03)</span> &lt;&lt; <span class="number">4</span>)</span> | <span class="params">(<span class="params">(c2 &amp; <span class="number">0</span>xF0)</span> &gt;&gt; <span class="number">4</span>)</span>];
+encoded += chars[<span class="params">(<span class="params">(c2 &amp; <span class="number">0</span>x0F)</span> &lt;&lt; <span class="number">2</span>)</span> | <span class="params">(<span class="params">(c3 &amp; <span class="number">0</span>xC0)</span> &gt;&gt; <span class="number">6</span>)</span>];
+encoded += chars[c3 &amp; <span class="number">0</span>x3F];
+</code></pre></li>
+</ol>
+<p><code>(c1 &amp; 0xFC) &gt;&gt; 2</code> ：<em>0xFC</em> 为十六进制，转换为二进制为 <em>11111100</em> , 将 <em>c1</em>  <strong>按位与</strong> <em>11111100</em> （&amp;是按位与）, 结果就是高6位保持不变，低两位清0。<strong>&gt;&gt;2</strong> 是右移两位，就是把高6位移到低6位。</p>
+<p><code>((c1 &amp; 0x03) &lt;&lt; 4) | ((c2 &amp; 0xF0) &gt;&gt; 4)</code>： <em>0x03</em> 转换为二进制为 <em>00000011</em> , 所以 <em>((c1 &amp; 0x03) &lt;&lt; 4)</em> 就是前6位清零后两位不变， 再左移4位。 </p>
+<p>   假设 <em>c1</em> 为 <em>01001101</em>, 经过第一步后变为 <em>00000001</em>， 再经过左移后变为 <em>00010000</em> 。</p>
+<p>   假设 <em>c2</em> 为 <em>01100001</em> , 经过 &amp; 并右移4位为： <em>00000110</em> 。 <em>c1</em> | <em>c2</em> : <em>00010110</em> ，也就是 <em>010110</em> 。</p>
+<p>   其他的都是这么一个意思就不解释了。还有，解码就是上面的逆运算. 嘛嘛！你们肯定会的0. 0 。</p>
+<h2 id="About">About</h2><p>  由于上面涉及了 <em>位运算</em> , 那就顺便提一下。</p>
+<p>  <em>朴灵</em> 的《深入浅出》有提到：</p>
+<p>  Javascript 的一个典型弱点就是 <em>位运算</em> 。Javascript 的位运算是参照 <em>Java</em> 的位算法实现的， 但是 <em>Java</em> 位运算是在 int 型数字的基础上运行的， 而 Javascript 中只有 double 型的数据类型， 在进行位运算的过程中， 需要将 double 型转换成 int 型， 然后再进行。 所以 Javascript 层面上做位运算效率不高。</p>
+<p>  在应用中， 会频繁出现位运算的需求， 包括 <em>转码</em> , <em>编码</em> 的过程， 如果通过 Javascript 来实现， CPU 资源将会耗费很多， 这时编写 <em>C/C++</em> 扩展模块来提升性能的机会就来了。</p>
+
+            
+            <section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"f10"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>

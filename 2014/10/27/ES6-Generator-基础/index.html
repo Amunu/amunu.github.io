@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="为了更好的回避js的回调金字塔，就可以使用ES6 generator 来取代回调函数。
+installationnode.js 中需要 0.11.*版本， 由于我装了nvm， 所以直接可以用 nvm install 0.11.13 来安装 node 版本。
+同时启动 harmony generato">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ES6 Generator 基础 | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "2014/10/27/ES6-Generator-基础/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>ES6 Generator 基础</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2014-10-27T04:04:57.000Z" itemprop="datePublished">2014年10月27日</time>,
+更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
+By <a href="http://f10.moe" title="Minary">Minary</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#installation"><span class="toc-number">1.</span> <span class="toc-text">installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#generator"><span class="toc-number">2.</span> <span class="toc-text">generator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代替回调金字塔"><span class="toc-number">3.</span> <span class="toc-text">代替回调金字塔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料："><span class="toc-number">4.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+            </div>
+            
+            <p>为了更好的回避js的回调金字塔，就可以使用ES6 generator 来取代回调函数。</p>
+<h3 id="installation">installation</h3><p>node.js 中需要 <strong>0.11.*</strong>版本， 由于我装了<a href="http://f10.moe/2014/10/27/nvm%E7%AE%A1%E7%90%86Node%E7%89%88%E6%9C%AC/"><strong>nvm</strong></a>， 所以直接可以用 <code>nvm install 0.11.13</code> 来安装 <strong>node</strong> 版本。</p>
+<p>同时启动 <strong>harmony generator</strong> 还需要使用 <code>node -harmony</code> 。</p>
+<p>在 <strong>chrome</strong> 中使用该特效需要打开 chrome://flags/， 然后将 <strong>harmony</strong> 设置为 <strong>enable</strong> , 重启 <strong>chrome</strong> 。</p>
+<h3 id="generator">generator</h3><p>那么什么是 generator 呢。其实，它是一个函数，但是这个函数的行为比较特殊：</p>
+<ul>
+<li><p>它不直接执行逻辑，而是用来生成一个对象。正如它的名字一样，他是一个生成器。</p>
+</li>
+<li><p>它所生成的对象中的函数可以把逻辑拆开来， 一段一段调用执行， 而不像普通函数，从头执行到尾， 一次执行完毕。</p>
+</li>
+<li><p>你可以暂停它的执行。当你请求它时，它会给出对应的响应，但是不会继续往下执行，直到你再次请求。</p>
+</li>
+</ul>
+<p>generator 的语法：</p>
+<ul>
+<li><p>函数声明/函数表达式 的关键字 <code>function</code> 后多了个 <code>*</code> 。</p>
+</li>
+<li><p>函数体中多了 <code>yield</code> 运算符。yield 有点像是 return 关键字，因为它们都返回一个值，但是这里的函数会在 yield 之后。</p>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10140;  test  node -harmony       &#10;&#62; function * GenA()&#123;&#10;&#62;     console.log(&#39;from GenA, first.&#39;);&#10;&#62;     yield 1;&#10;&#62;     console.log(&#39;from GenA, second.&#39;);&#10;&#62;     var value3 = yield 2;&#10;&#62;     console.log(&#39;from GenA, third.&#39;,value3);&#10;&#62;     return 3;&#10;&#62; &#125;&#10;undefined&#10;&#62; var a = new GenA();&#10;undefined&#10;&#62; a.next();&#10;from GenA, first.&#10;&#123; value: 1, done: false &#125;&#10;&#62; a.next();&#10;from GenA, second.&#10;&#123; value: 2, done: false &#125;&#10;&#62; a.next(2333);&#10;from GenA, third. 2333&#10;&#123; value: 3, done: true &#125;&#10;&#62; a.next();&#10;&#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
+<p>例子解释：</p>
+<ul>
+<li><p>在调用 <code>GenA()</code> 时，函数体中的逻辑并不会执行（控制台没有输出），直接调用 <code>a.next()</code> 时才会执行</p>
+</li>
+<li><p><code>a</code> 是一个对象，它由生成器 <code>GenA()</code> 实例化而来（事实上，不需要new运算符也是一样的结果）</p>
+</li>
+<li><p>调用 <code>a.next()</code> 时，函数体中的逻辑才开始真正执行，每次调用时会到 <code>yield</code> 语句结束，并将 <code>yield</code> 的运算数作为结果返回</p>
+</li>
+<li><p><code>a.next()</code> 返回的结果是一个对象，对 <code>yield</code> 的运算数做了包装，并带上了 <code>done</code> 属性</p>
+</li>
+<li><p>当 <code>done</code> 属性为 <code>false</code> 时，表示该函数逻辑还未执行完，可以调用 <code>a.next()</code> 继续执行，否则不可继续调用</p>
+</li>
+<li><p>最后一次返回的结果为 <code>return</code> 语句返回的结果，且 <code>done</code> 值为 <code>true</code> 。如果不写 <code>return</code> ，则值为 <code>undefined</code></p>
+</li>
+<li><p><code>value3 = yield 2</code> 这句是指，这一段逻辑返回2，在下一次调用 <code>a.next()</code> 时，将参数赋给 <code>value3</code> 。换句话说，这句只执行了后面半段就暂停了，等到再次调用 <code>a.next()</code> 时才会将参数赋给value3并继续执行下面的逻辑</p>
+</li>
+</ul>
+<h3 id="代替回调金字塔">代替回调金字塔</h3><p>首先先写一个耗时的异步的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function delay (time, callback) &#123;&#10;&#9;setTimeout(function()&#123; callback &#38;&#38; callback()&#125;, time);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后构造金字塔：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delay(200, function()&#123;&#10;&#9;delay(300, function()&#123;&#10;&#9;&#9;delay(400, function()&#123;&#10;&#9;&#9;&#9;delay(500, function()&#123;&#10;&#9;&#9;&#9;&#9;delay(100, function()&#123;&#10;&#9;&#9;&#9;&#9;&#9;console.log(&#39;finish&#39;);&#10;&#9;&#9;&#9;&#9;&#125;);&#10;&#9;&#9;&#9;&#125;);&#10;&#9;&#9;&#125;);&#10;&#9;&#125;);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<p>接下来我们来定义一个 generator 函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function* doDelay()&#123;&#10;&#9;delay(200, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;delay(300, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;delay(400, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;delay(500, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;delay(600, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#125;&#10;var a = new doDelay();&#10;a.next();</span><br></pre></td></tr></table></figure>
+<p>此时函数依旧是异步的，由于我们当前还未放入任何的yield语句。<br>所以执行的时候会直接输出5个1。<br>所以改成下面这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function* doDelay()&#123;&#10;&#9;yield delay(200, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;yield delay(300, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;yield delay(400, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;yield delay(500, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#9;yield delay(600, function()&#123;console.log(&#39;1&#39;);&#125;);&#10;&#125;&#10;var a = new doDelay();&#10;a.next();</span><br></pre></td></tr></table></figure>
+<hr>
+<p>现在我们要编写一个 <code>resume</code> 函数来推动 generator。</p>
+<p>如果你看看其他使用generator代替回调函数的例子，你会看到generator函数总是被另一个函数包裹着 – 通常是一个叫做“run”或者“execute”的函数。这样做的目的如下：</p>
+<ul>
+<li><p>接收一个 <code>generator</code> 作为参数</p>
+</li>
+<li><p>使用这个 <code>generator</code> 来创建一个新的 <code>generator</code> 迭代器对象，我们将调用它的 <code>next</code> 方法。</p>
+</li>
+<li><p>创建一个 <code>resume</code> 函数来使用这个 <code>generator</code> 迭代器对象来推进 <code>generator</code></p>
+</li>
+<li><p>将 <code>resume</code> 函数传递给这个 <code>generator</code> 以便 <code>generator</code> 能够访问 <code>resume</code></p>
+</li>
+<li><p>在最开始时调用 <code>next()</code> 函数，以便我们的代码在碰到第一个 <code>yield</code> 之前开始执行</p>
+</li>
+</ul>
+<hr>
+<p>创建 <code>run()</code> 函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function run(generatorFunc)&#123;&#10;&#9;var generatorltr = generatorFunc(resume);&#10;&#9;function resume(callbackValue)&#123;&#10;&#9;&#9;generatorltr.next(callbackValue);&#10;&#9;&#125;&#10;&#9;generatorltr.next();&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们有了一个能够接收一个 <code>generator</code> 函数的函数，并为它传递了一个了解如何推进 <code>generator</code> 迭代器对象的函数。</p>
+<p>注意到我们在 <code>resume</code> 函数中用到了 <code>next</code> 的第二个特性。</p>
+<p><code>resume</code> 是被传递给 <code>delay</code> 的回调函数，因此它接收 <code>delay</code> 函数提供的值。<code>resume</code> 将这个值传递给 <code>next</code> ，因此 <code>yield</code> 语句的结果实际上是我们异步函数的结果。</p>
+<p>接下来将之前的 <code>generator</code> 函数包上 <code>run</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function delay (time, callback) &#123;&#10;&#9;setTimeout(function()&#123; callback &#38;&#38; callback(1)&#125;, time);&#10;&#125;&#10;&#10;function run(generatorFunc)&#123;&#10;&#9;var generatorltr = generatorFunc(resume);&#10;&#9;function resume(callbackValue)&#123;&#10;&#9;&#9;generatorltr.next(callbackValue);&#10;&#9;&#125;&#10;&#9;generatorltr.next();&#10;&#125;&#10;&#10;run(function* doDelay(resume)&#123;&#10;&#9;console.log(yield delay(200, resume));&#10;&#9;console.log(yield delay(300, resume));&#10;&#9;console.log(yield delay(400, resume));&#10;&#9;console.log(yield delay(500, resume));&#10;&#9;console.log(yield delay(600, resume));&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>run接收了我们的generator并创建了一个resume函数</li>
+<li>run创建了一个generator迭代器对象（我们在它上面调用next方法），提供了resume函数。接着它推动了generator迭代器向前运行。</li>
+<li>我们的generator碰到了第一个yield语句并且调用delay。接着这个generator暂停。</li>
+<li>delay在200ms之后完成然后调用resume。</li>
+<li>resume告诉我们的generator进行下一步。它将结果传递给delay以便console能够将它打印出来。</li>
+<li>我们的generator碰到了第二个yield，调用delay然后再次暂停。 </li>
+<li>delay等待300ms之后调用resume回调函数。</li>
+<li>resume再次推进generator。</li>
+<li>重复继续</li>
+</ul>
+<p>理解了 run 的步骤，tj大神的 <a href="https://github.com/tj/co" target="_blank" rel="external">co</a> 框架也差不多能起来了。</p>
+<hr>
+<h3 id="参考资料：">参考资料：</h3><ul>
+<li><a href="http://www.toobug.net/article/learning_es6_generator.html" target="_blank" rel="external">http://www.toobug.net/article/learning_es6_generator.html</a></li>
+<li><a href="http://bg.biedalian.com/2013/12/21/harmony-generator.html" target="_blank" rel="external">http://bg.biedalian.com/2013/12/21/harmony-generator.html</a></li>
+<li><a href="http://www.html-js.com/article/A-day-to-learn-Javascript-to-replace-the-callback-function-with-ES6-Generator" target="_blank" rel="external">http://www.html-js.com/article/A-day-to-learn-Javascript-to-replace-the-callback-function-with-ES6-Generator</a></li>
+</ul>
+
+            
+            <section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"f10"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>

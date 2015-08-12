@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="随手向[野生凯迪]借了本书《Erlang/OTP并发编程实战》。所以说， 开始学习 erlang 了(闲的时候)。嘛， 笔记模式开启。
+数值与算数运算
+整数 （erlang 中的整数 大小没有限制 ， 不用担心溢出或者截断）
+
+较小的会被存在单个机器字长内， 处理较大的整数（bignum）时，会自动">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>erlang 的数据类型 | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "2014/10/16/erlang-的数据类型/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>erlang 的数据类型</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2014-10-16T07:57:34.000Z" itemprop="datePublished">2014年10月16日</time>,
+更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
+By <a href="http://f10.moe" title="Minary">Minary</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数值与算数运算"><span class="toc-number">1.</span> <span class="toc-text">数值与算数运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子"><span class="toc-number">2.</span> <span class="toc-text">原子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组"><span class="toc-number">3.</span> <span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-number">4.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">5.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项式比较"><span class="toc-number">6.</span> <span class="toc-text">项式比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小于等于/大于等于"><span class="toc-number">7.</span> <span class="toc-text">小于等于/大于等于</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相等比较"><span class="toc-number">8.</span> <span class="toc-text">相等比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">9.</span> <span class="toc-text">总结</span></a></li></ol>
+            </div>
+            
+            <p>随手向[野生凯迪]借了本书《Erlang/OTP并发编程实战》。<br>所以说， 开始学习 <em>erlang</em> 了(闲的时候)。嘛， 笔记模式开启。</p>
+<h3 id="数值与算数运算">数值与算数运算</h3><ul>
+<li><p>整数 （erlang 中的整数 <em>大小没有限制</em> ， 不用担心溢出或者截断）</p>
+<ul>
+<li>较小的会被存在单个机器字长内， 处理较大的整数（bignum）时，会自动分配内存。</li>
+<li>可以用 <strong>$</strong> 前缀来得到任何字符的数值编码。例如（$1, $?, $\n） </li>
+</ul>
+</li>
+<li><p>浮点数</p>
+<ul>
+<li>浮点数采用64位IEEE 754-1985 格式 （双精度）。</li>
+<li>不允许以小数点开头， 例如 <em>.12</em> 必须写成 <em>0.12</em></li>
+<li>Erlang没有单精度浮点数。</li>
+</ul>
+</li>
+<li><p>算数运算与位运算</p>
+<ul>
+<li>加减乘和常见的语言没什么区别。</li>
+<li>除法有两种表达方式。 用 ‘ <strong>/</strong> ‘，它总是返回浮点数； 用’ <strong>div</strong> ‘, 则只会返回整数。 例如：<strong>5 / 3</strong> 返回 1.6666666666666667 ， <strong>5 div 3</strong> 返回 1 。</li>
+<li>整数求余（rem）： 15 rem 4 ，返回 3 。</li>
+<li>位运算： <strong>N bsl K</strong> 代表将整数 N 左移 K<br>位， <strong>bsr</strong> 是右移。 位运算逻辑运算符分别为（band， bor， bxor， bnot）。 </li>
+</ul>
+</li>
+<li><p>构造二进制串的基本语法： <code>&lt;&lt;10, &quot;say&quot;, &quot;hello&quot;&gt;&gt;.</code></p>
+</li>
+</ul>
+<h3 id="原子">原子</h3><ul>
+<li><p>定义： 在Erlang中， <em>原子</em> 是一种仅由字符序列来标识的特殊字符串常量， 因此两个原子只要具有相同的字符表示， 就完全等同。</p>
+</li>
+<li><p>作用类似与 JAVA 或 C 中的 enum 常量：用作标签。</p>
+</li>
+<li><p>通常为小写，在首字母小写后可以使用大写字母，数字，下划线和 @ 。（例如： ok， error， foo， undefined， routue66）</p>
+</li>
+<li><p>原子一旦被创建， 即使不再使用也永远不会被清除， 除非系统重启。</p>
+</li>
+</ul>
+<h3 id="元组">元组</h3><ul>
+<li><p>定义： 元组（或n元组， 即三元组， 四元组等的一般表达式）是其他 Erlang 项式的 <strong><em>定长有序序列</em></strong> 。元组用大括号表示为：{1， 2， 3}， {a， {b, c, d}}, {“aa”, “bb”}。</p>
+</li>
+<li><p>Erlang的一个标准约定是用原子作为第一个元素来标记元组数据的类别。例如 {size, 4}, {position, 5, 2}。这称为 <strong>标记元组</strong> 。</p>
+</li>
+<li><p>标准库中的模块实现了一些更为复杂的 <strong>抽象数据类型</strong> , 如数组，集合，字典（即关联数组或者哈希表）等；但在底层，他们大都是采用各种手段基于元组实现的。</p>
+</li>
+</ul>
+<h3 id="列表">列表</h3><p>元组针对的是定长序列。 要处理变长序列， 就需要用到列表了。</p>
+<ul>
+<li><p>列表可用于存放任意多项式。 例如： <code>[], [1, 2, 3], [one, two], [{1, 2},{3, 3}]</code> 等</p>
+</li>
+<li><p>添加列表元素</p>
+<ul>
+<li>在现有列表中创建一个新的列表， 并使原列表成为新列表的一部分。需要用到 <strong>|</strong> 。例如： <code>[1 | []], [1 | [3, 2]], [1, 2 | [3, 4, 5]]</code>。</li>
+<li>另外还可以用 <strong>++</strong> 运算符来操作<code>[1, 2, 3, 4, 5] ++ [6, 7]</code> , 它其实就是执行了<code>[1, 2, 3, 4, 5 | [6]]</code> 和 <code>[1, 2, 3, 4, 5, 6 | [7]]</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串">字符串</h3><ul>
+<li>Erlang中的双引号字符实际上就是列表， 其元素就是该字符中个字符的数值编码所对应的整数。例如(下面三组是等价的)：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#34;abcd&#34;&#10;&#34;hello&#34;&#10;&#34; \t\r\n&#34;&#10;&#34;&#34;&#10;&#10;---&#10;&#10;[97, 98, 99, 100]&#10;[72, 101, 108, 108, 111, 33]&#10;[32, 9, 13, 10]&#10;[]&#10;&#10;---&#10;&#10;[$a, $b, $c, $d]&#10;[$h, $e, $l, $l, $o]&#10;[$\ ,$\t\, $r, $\n]&#10;[]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>字符串就是列表，所以之前能处理列表的方法一样也适用于字符串。</li>
+</ul>
+<h3 id="项式比较">项式比较</h3><ul>
+<li>Erlang 的各种数据类型有一个共同点： 它们都可以通过内置的 &lt; , &gt; 和 == 运算符来进行比较和排序。<ul>
+<li>常规： <code>1 &lt; 2</code> 以及 <code>3.14 &gt; 3</code>等， 原子、字符串（以及其他各种列表）和元组则按字典序排序。例如： <code>&#39;abc&#39; &lt; &#39;abba&#39;， [1, 2, 2] &gt; [1, 2, 1]</code>, 以及<code>{a,b} &lt; {a, c}</code></li>
+<li>不同类型之间的排序规则：<code>42 &lt; &#39;aa&#39;, [1, 2, 3] &gt; {1, 2, 3}</code> 以及 <code>&#39;abc&#39; &lt; &quot;abc&quot;</code>。更准确的说， 数值&lt;原子&lt;元组&lt;列表。</li>
+</ul>
+</li>
+</ul>
+<h3 id="小于等于/大于等于">小于等于/大于等于</h3><ul>
+<li>Erlang 的小于等于不写成 <code>&lt;=</code> ，原因在于这看起来太像一个向左指的箭头。取而代之， 小于等于写作 <code>=&lt;</code> ,大于等于还是一样 <code>&gt;=</code> </li>
+</ul>
+<h3 id="相等比较">相等比较</h3><ul>
+<li>Erlang 有两种比较运算符：<ul>
+<li>完全相等：   <code>=:=</code>， 例如 10 =:= 10 返回true， 1 =:= 1.0 返回 false ；不完全相等： <code>=/=</code>， 例如 1 =/=2 返回true， 1 =/= 1.0 返回 true 。</li>
+<li>算数相等运算符： <code>==</code>， 必要时它会将整数强制转换成浮点数再进行比较。 因此 <code>2 == 2.0</code> 返回 true ； 算数不等写作 <code>/=</code> ，例如 <code>2 /= 2.0</code> 返回 false。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="总结">总结</h3><p>今天就这样了， 到现在为止觉得 erlang 还是一门挺好玩的语言。</p>
+
+            
+            <section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"f10"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>

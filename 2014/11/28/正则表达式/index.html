@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="最近一直在忙于加班，已经连续两个星期996(9点上班9点下班星期六加班)了！项目采用的是 TDD 开发模式， 所以前期写测试写到吐（还好已经熬过这段时间了）。不过确实在写接口的时候有了这些测试方便了许多。咦，总感觉跑题了！
+进入正题，之前一直想学 正则表达式 ，一直没学（因为任性），趁刚写完一个接口">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>正则表达式 | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "2014/11/28/正则表达式/";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    <article class="post container">
+    <div class="well post-body first-post last-post">
+        <h1>正则表达式</h1>
+        
+        <div class="time-info">
+发表于:<time datetime="2014-11-28T08:19:03.000Z" itemprop="datePublished">2014年11月28日</time>,
+更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
+By <a href="http://f10.moe" title="Minary">Minary</a>
+        </div>
+        
+        <div class="post-body-inner">
+            <div id="toc" class="toc-article well">
+                <strong class="toc-title">大纲</strong>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#what_is_正则？"><span class="toc-number">1.</span> <span class="toc-text">what is 正则？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#先来几个简单的正则！"><span class="toc-number">2.</span> <span class="toc-text">先来几个简单的正则！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-number">3.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符转义"><span class="toc-number">4.</span> <span class="toc-text">字符转义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限定符"><span class="toc-number">5.</span> <span class="toc-text">限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符类"><span class="toc-number">6.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分枝条件"><span class="toc-number">7.</span> <span class="toc-text">分枝条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组"><span class="toc-number">8.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反义"><span class="toc-number">9.</span> <span class="toc-text">反义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">10.</span> <span class="toc-text">link</span></a></li></ol>
+            </div>
+            
+            <p>最近一直在忙于加班，已经连续两个星期996(9点上班9点下班星期六加班)了！<br>项目采用的是 TDD 开发模式， 所以前期写测试写到吐（还好已经熬过这段时间了）。不过确实在写接口的时候有了这些测试方便了许多。<br>咦，总感觉跑题了！</p>
+<p>进入正题，之前一直想学 <strong>正则表达式</strong> ，一直没学（因为<del>任性</del>），趁刚写完一个接口还有时间喘气的时候把它给学了吧！</p>
+<h3 id="what_is_正则？">what is 正则？</h3><blockquote>
+<p>正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。</p>
+</blockquote>
+<h3 id="先来几个简单的正则！">先来几个简单的正则！</h3><ul>
+<li><p>假设要在一篇文章中找 ‘hi’ 这个单词。那就直接用正则表达式 <code>hi</code>。 它可以精确匹配这样的字符串：由两个字符组成，前一个字符是h,后一个是i。通常，处理正则表达式的工具会提供一个忽略大小写的选项，如果选中了这个选项，它可以匹配 ‘hi,HI,Hi,hI’ 这四种情况中的任意一种。</p>
+</li>
+<li><p>但是这时候很多有 ‘hi’ 的单词也会被找到，比方说 ‘high’，‘him’等等，如果要精确查找， 可以用 <code>\bhi\b</code> 。</p>
+</li>
+</ul>
+<blockquote>
+<p><code>\b</code> 是正则表达式规定的一个特殊代码（元字符，metacharacter）,能匹配一个单词边界，也就是指单词和空格间的位置。例如， <code>er\b</code> 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的 ‘er’。用了 <code>\ber\b</code>后就只能匹配单词 ‘er’</p>
+</blockquote>
+<ul>
+<li><code>\bhi\b.*\bmiao\b</code> : 匹配的字符串是：先是一个单词 hi ,然后是任意个任意字符(但不能是换行)，最后是 miao 这个单词。</li>
+</ul>
+<blockquote>
+<p> <code>.</code> 的作用是匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，使用 <code>[.\n]</code> 的模式。<br> <code>*</code> 它代表的不是字符，也不是位置，而是数量。它指定 * 前边的内容可以连续重复使用任意次以使整个表达式得到匹配。</p>
+</blockquote>
+<h3 id="元字符">元字符</h3><p>看了上面的几个例子，估计已经大概明白 <code>元字符</code> 是个什么东西了吧。接下来介绍几个基本的元字符</p>
+<table class="table table-striped-white table-bordered"><thead><tr><th>代码</th><th style="text-align:center;">说明</th></tr></thead><tbody><tr><td>.</td><td style="text-align:center;">匹配除换行符以外的任意字符</td></tr><tr><td>\w</td><td style="text-align:center;">匹配字母或数字或下划线或汉字</td></tr><tr><td>\s</td><td style="text-align:center;">匹配任意的空白符</td></tr><tr><td>\d</td><td style="text-align:center;">匹配数字</td></tr><tr><td>\b</td><td style="text-align:center;">匹配单词的开始或结束</td></tr><tr><td>^</td><td style="text-align:center;">匹配字符串的开始</td></tr><tr><td>$</td><td style="text-align:center;">匹配字符串的结束</td></tr></tbody></table>
+
+<p>元字符 <code>^</code> 和 <code>$</code> 都匹配一个位置，这和 <code>\b</code> 有点类似。<code>^</code> 匹配用来查找的字符串的开头，<code>$</code> 匹配结尾。比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d{5,12}$</code> 。</p>
+<p><code>{5,12}</code> 是重复的次数不能少于5次，不能多于12次的意思，否则都不匹配。因为使用了 <code>^</code> 和 <code>$</code> ，所以输入的整个字符串都要用来和 <code>\d{5,12}</code> 来匹配，也就是说整个输入必须是5到12个数字，因此如果输入的QQ号能匹配这个正则表达式的话，那就符合要求了。<br>和忽略大小写的选项类似，有些正则表达式处理工具还有一个处理多行的选项。如果选中了这个选项，<code>^</code> 和 <code>$</code>的意义就变成了匹配行的开始处和结束处。</p>
+<h3 id="字符转义">字符转义</h3><p>如果想查找元字符本身的话，比如(<code>.</code> 和 <code>*</code>), 就需要使用 <code>\</code> 来取消这些字符的特殊意义。例如应该使用 <code>\.</code> 和 <code>\*</code>。当然，要查找 <code>\</code> 本身，得用 <code>\\</code> .<br>例如：<code>f10\.moe</code> 匹配 f10.moe，<code>C:\\Windows</code> 匹配 C:\Windows。</p>
+<h3 id="限定符">限定符</h3><p>正则表达式中所有的限定符(指定数量的代码，例如*,{5,12}等)：</p>
+<table class="table table-striped-white table-bordered"><thead><tr><th>代码/语法</th><th style="text-align:center;">说明</th></tr></thead><tbody><tr><td>*</td><td style="text-align:center;">重复零次或更多次</td></tr><tr><td>+</td><td style="text-align:center;">重复一次或更多次</td></tr><tr><td>?</td><td style="text-align:center;">重复零次或一次</td></tr><tr><td>{n}</td><td style="text-align:center;">重复n次</td></tr><tr><td>{n,}</td><td style="text-align:center;">重复n次或更多次</td></tr><tr><td>{n,m}</td><td style="text-align:center;">重复n到m次</td></tr></tbody></table>
+
+<h3 id="字符类">字符类</h3><p>要想查找数字，字母或数字，空白是很简单的，因为已经有了对应这些字符集合的元字符，但是如果你想匹配没有预定义元字符的字符集合(比如元音字母 <code>a,e,i,o,u</code> ),应该怎么办？<br>很简单，你只需要在方括号里列出它们就行了，像 <code>[aeiou]</code> 就匹配任何一个英文元音字母，<code>[.?!]</code>匹配标点符号(<code>.</code>或<code>?</code>或<code>!</code>)。<br>我们也可以轻松地指定一个字符范围，像 <code>[0-9]</code> 代表的含意与 <code>\d</code> 就是完全一致的：一位数字；同理    <code>[a-z0-9A-Z_]</code>也完全等同于 <code>\w</code>（如果只考虑英文的话）。</p>
+<hr>
+<p>下面是一个更复杂的表达式： <code>\(?0\d{2}[) -]?\d{8}</code> 。<br><code>(</code> 和 <code>)</code> 也是元字符，所以在这里需要使用转义。 这个表达式可以匹配几种格式的电话号码，像 <code>(010)88886666</code> ，或 <code>022-22334455</code> ，或 <code>02912345678</code> 等。<br>解析：</p>
+<ul>
+<li>转义字符 <code>\(</code> ,它能出现 0 次或 1 次 <code>(?)</code></li>
+<li>然后是一个 0，后面跟着 2 个数字 <code>(\d{2})</code></li>
+<li>然后是 <code>)</code> 或 <code>-</code> 或 <code>空格</code> 中的一个，它出现 1 次或不出现 <code>(?)</code></li>
+<li>最后是 8 个数字 <code>(\d{8})</code> 。</li>
+</ul>
+<h3 id="分枝条件">分枝条件</h3><p>可是, 刚才那个表达式也能匹配 010)12345678 或 (022-87654321 这样的 “不正确” 的格式。要解决这个问题，我们需要用到 <strong>分枝条件</strong> 。正则表达式里的 <strong>分枝条件</strong> 指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用 “<code>|</code>“ 把不同的规则分隔开。</p>
+<ul>
+<li><p><code>0\d{2}-\d{8}|0\d{3}-\d{7}</code> 可以匹配 010-12345678 或者 0111-1234567 这两种电话号码。</p>
+</li>
+<li><p><code>\(?0\d{2}\)?[- ]?\d{8}|0\d{2}[- ]?\d{8}</code> 这个表达式匹配3位区号的电话号码，其中区号可以用小括号括起来，也可以不用，区号与本地号间可以用连字号或空格间隔，也可以没有间隔。</p>
+</li>
+<li><p><code>\d{5}-\d{4}|\d{5}</code> 这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。之所以要给出这个例子是因为它能说明一个问题：使用分枝条件时，要注意各个条件的 <strong>顺序</strong> 。如果你把它改成 <code>\d{5}|\d{5}-\d{4}</code> 的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。原因是匹配分枝条件时，将会 <strong>从左到右</strong> 地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。</p>
+</li>
+</ul>
+<h3 id="分组">分组</h3><p>上面讲了要重复单个字符时只需在后面加限定符就行，多个字符需要重复时可以用 <strong>小括号</strong>    来指定 <strong>子表达式</strong> (也叫分组)。<br>例如：</p>
+<ul>
+<li><p><code>(\d{1,3}\.){3}\d{1,3}</code> 是一个简单的IP地址匹配表达式。<code>\d{1,3}</code> 匹配 1 到 3 位的数字，<code>(\d{1,3}\.){3}</code> 匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复 3 次，最后再加上一个一到三位的数字 <code>(\d{1,3})</code>。</p>
+</li>
+<li><p>不幸的是，它也将匹配 256.300.888.999 这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：<code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code> 。</p>
+</li>
+</ul>
+<h3 id="反义">反义</h3><p>有时需要查找不属于某个能简单定义的字符类的字符。比如想查找除了数字以外，其它任意字符都行的情况，这时需要用到反义：</p>
+<table class="table table-striped-white table-bordered"><thead><tr><th>代码/语法</th><th style="text-align:center;">说明</th></tr></thead><tbody><tr><td>\W</td><td style="text-align:center;">匹配任意不是字母，数字，下划线，汉字的字符</td></tr><tr><td>\S</td><td style="text-align:center;">匹配任意不是空白符的字符</td></tr><tr><td>\D</td><td style="text-align:center;">匹配任意非数字的字符</td></tr><tr><td>[^x]</td><td style="text-align:center;">匹配除了x以外的任意字符</td></tr><tr><td>[^aeiou]</td><td style="text-align:center;">匹配除了aeiou这几个字母以外的任意字符</td></tr></tbody></table>
+
+<p>正则入门算是差不多了，要了解更多可以点下面链接深入:</p>
+<h3 id="link">link</h3><p><a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">http://deerchao.net/tutorials/regex/regex.htm</a></p>
+
+            
+            <section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"f10"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+        </div>
+    </div>
+</article>
+
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>

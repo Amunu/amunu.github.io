@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta name="author" content="Minary">
+    
+    <meta name="description" content="Minus + Binary = Minary">
+    
+    
+
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tag: erlang | Minary · (　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <!-- Javascript -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/jquery.backstretch.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/headroom.min.js"></script>
+    <script src="/js/jquery.headroom.min.js"></script> 
+    <script src="/js/common.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://f10.moe" title="Minary">Minary</a>
+            </div>
+
+            <div role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <p class="navbar-text pull-right">(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</p>
+
+                <ul class="nav navbar-nav">
+                    
+                    <li id="nav-index"><a href="/">首页</a></li>
+                    
+                    <li id="nav-archives"><a href="/archives">归档</a></li>
+                    
+                    <li id="nav-tags"><a href="/tags">标签</a></li>
+                    
+                    <li id="nav-links"><a href="/links">链接</a></li>
+                    
+                    <li id="nav-163blog"><a href="http://minary.blog.163.com/">舊博客</a></li>
+                    
+                    <li id="nav-curriculumvitae"><a href="/curriculumvitae">关于</a></li>
+                    
+                    
+                    <li><a href="https://github.com/Amunu" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    var backRoot = "/images/background/";
+    var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
+    //console.log(backArray);
+        
+    $(function() {
+        // page-id...
+        var pageId = "tags/erlang/index.html";
+        pageId = pageId.substr(0, pageId.indexOf("/"));
+        if(pageId === "") pageId = "index";
+        
+        $("#nav-" + pageId).addClass("active");
+    });
+    </script>
+    
+<div class="container archive-body">
+    <div class="row">
+        <div class="col-xs-3 well">
+            <div class="archive-title" >
+                <h2 class="tag-icon">erlang</h2>
+                <div>
+                    <a href="/tags"><< 返回标签列表</a> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-9" id="tag-list-body">
+            
+            <article class="post">
+                <div class="jumbotron">
+                    <h1><a href="/2014/10/20/erlang模式匹配/" title="erlang模式匹配">erlang模式匹配</a></h1>
+
+                    
+                        <p>模式匹配是Erlang不可或缺的功能。它的重要作用：
+
+选定控制流分支
+完成变量赋值（绑定）
+拆解数据结构（选择和提取各个组成部分）
+
+= 运算符就是模式匹配我们将 = 称为匹配运算符，这是因为它的功能就是 模式匹配 ，而不是赋值。运算符的左侧是一个 模式 , 右侧是一个普通表达</p>
+                    
+
+                    <p class="say-title">
+                        —— <img src="/images/avatar.gif" class="img-circle index-post-avatar" />
+                        <a href="http://f10.moe" target="_blank" title="Minary">Minary</a>
+                        于2014年10月20日默默地以 <a class="article-tag-link" href="/tags/erlang/">erlang</a>, <a class="article-tag-link" href="/tags/学习笔记/">学习笔记</a> 賣萌
+                    </p>
+                </div>
+            </article>
+            
+            <article class="post">
+                <div class="jumbotron">
+                    <h1><a href="/2014/10/17/erlang创建模块/" title="erlang创建模块与变量定义">erlang创建模块与变量定义</a></h1>
+
+                    
+                        <p>基本步骤想要自行开发实际的 Erlang 程序， 就必须把编写的代码放置到一个或者多个模块中。要新开发一个可供自己和其他人重用的模块，步骤如下：
+
+编写源码文件
+编译
+加载已编译的模块，或将它放到加载路径中以便自动加载
+
+my_module.erl首先新建一个 my_module</p>
+                    
+
+                    <p class="say-title">
+                        —— <img src="/images/avatar.gif" class="img-circle index-post-avatar" />
+                        <a href="http://f10.moe" target="_blank" title="Minary">Minary</a>
+                        于2014年10月17日默默地以 <a class="article-tag-link" href="/tags/erlang/">erlang</a>, <a class="article-tag-link" href="/tags/学习笔记/">学习笔记</a> 賣萌
+                    </p>
+                </div>
+            </article>
+            
+            <article class="post">
+                <div class="jumbotron">
+                    <h1><a href="/2014/10/16/erlang-的数据类型/" title="erlang 的数据类型">erlang 的数据类型</a></h1>
+
+                    
+                        <p>随手向[野生凯迪]借了本书《Erlang/OTP并发编程实战》。所以说， 开始学习 erlang 了(闲的时候)。嘛， 笔记模式开启。
+数值与算数运算
+整数 （erlang 中的整数 大小没有限制 ， 不用担心溢出或者截断）
+
+较小的会被存在单个机器字长内， 处理较大的整数（bi</p>
+                    
+
+                    <p class="say-title">
+                        —— <img src="/images/avatar.gif" class="img-circle index-post-avatar" />
+                        <a href="http://f10.moe" target="_blank" title="Minary">Minary</a>
+                        于2014年10月16日默默地以 <a class="article-tag-link" href="/tags/erlang/">erlang</a>, <a class="article-tag-link" href="/tags/学习笔记/">学习笔记</a> 賣萌
+                    </p>
+                </div>
+            </article>
+            
+            
+            
+        </div>
+    </div>
+        
+    <div class="col-xs-19 all-list-box">
+    </div>
+</div>
+    <footer id="footer">
+    <div id="bottom-tip">
+        Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
+    </div>
+        <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
+        <small>&copy; 2014 XadillaX</small>
+    </footer>
+</body>
+</html>
