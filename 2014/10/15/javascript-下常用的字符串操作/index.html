@@ -7,9 +7,9 @@
     <meta name="author" content="Minary">
     
     <meta name="description" content="charAt()返回在指定位置的字符。
-1var str = &amp;#34;abac_dfra_wa&amp;#34;;&amp;#10;console.log(str.charAt(3)); //&amp;#36755;&amp;#20986; c
+12var str = &quot;abac_dfra_wa&quot;;console.log(str.charAt(3)); //输出 c
 charCodeAt()返回在指定的位置的字符的 Unicode 编码。
-1var ">
+12var str = &quot;abac_dfra_wa&quot;;cons">
     
     
 
@@ -81,7 +81,6 @@ charCodeAt()返回在指定的位置的字符的 Unicode 编码。
     <script>
     var backRoot = "/images/background/";
     var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
-    //console.log(backArray);
         
     $(function() {
         // page-id...
@@ -92,14 +91,13 @@ charCodeAt()返回在指定的位置的字符的 Unicode 编码。
         $("#nav-" + pageId).addClass("active");
     });
     </script>
+
     <article class="post container">
     <div class="well post-body first-post last-post">
         <h1>javascript 下常用的字符串操作</h1>
         
         <div class="time-info">
-发表于:<time datetime="2014-10-15T04:16:51.000Z" itemprop="datePublished">2014年10月15日</time>,
-更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
-By <a href="http://f10.moe" title="Minary">Minary</a>
+发表于:<time datetime="2014-10-15T04:16:51.000Z" itemprop="datePublished">2014-10-15</time>，更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015-06-08</time>，By <a href="http://f10.moe" title="Minary">Minary</a>
         </div>
         
         <div class="post-body-inner">
@@ -109,47 +107,51 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
             </div>
             
             <h2 id="charAt()">charAt()</h2><p>返回在指定位置的字符。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &#34;abac_dfra_wa&#34;;&#10;console.log(str.charAt(3)); //&#36755;&#20986; c</span><br></pre></td></tr></table></figure>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"abac_dfra_wa"</span>;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.charAt(<span class="number">3</span>)); <span class="comment">//输出 c</span></span><br></pre></td></tr></table></figure>
 <h2 id="charCodeAt()">charCodeAt()</h2><p>返回在指定的位置的字符的 Unicode 编码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &#34;abac_dfra_wa&#34;;&#10;console.log(str.charCodeAt(3)); //&#36755;&#20986;99</span><br></pre></td></tr></table></figure>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"abac_dfra_wa"</span>;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.charCodeAt(<span class="number">3</span>)); <span class="comment">//输出99</span></span><br></pre></td></tr></table></figure>
 <h2 id="fromCharCode()">fromCharCode()</h2><p>从字符编码创建一个字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(String.fromCharCode(72,69,76,76,79)); //&#36755;&#20986;HELLO</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(String.fromCharCode(<span class="number">72</span>,<span class="number">69</span>,<span class="number">76</span>,<span class="number">76</span>,<span class="number">79</span>)); <span class="comment">//输出HELLO</span></span><br></pre></td></tr></table></figure>
 <h2 id="concat()">concat()</h2><p>连接字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &#34;abac_dfra_wa&#34;;&#10;console.log(str.concat(&#39;_000&#39;)); //&#36755;&#20986;abac_dfra_wa_000</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"abac_dfra_wa"</span>;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">concat</span>(<span class="string">'_000'</span>)); <span class="comment">//输出abac_dfra_wa_000</span></span><br></pre></td></tr></table></figure>
 <h2 id="indexOf()">indexOf()</h2><p>检索字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &#34;abac_dfra_wa&#34;; &#10;console.log(str.indexOf(&#39;ac&#39;)); //&#36755;&#20986;2</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"abac_dfra_wa"</span>; </span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.indexOf(<span class="string">'ac'</span>)); <span class="comment">//输出2</span></span><br></pre></td></tr></table></figure>
 <h2 id="lastIndexOf()">lastIndexOf()</h2><p>从后向前搜索字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = &#34;abac_dfra_wa&#34;;&#10;console.log(str.lastIndexOf(&#39;ac&#39;)); //&#36755;&#20986;2</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span> = <span class="string">"abac_dfra_wa"</span>;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.lastIndexOf(<span class="string">'ac'</span>)); <span class="comment">//输出2</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="match()">match()</h2><p>找到一个或多个正则表达式的匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str=&#34;1 plus 2 equal 3&#34;&#10;console.log(str.match(&#39;plus&#39;)); // plus&#10;console.log(str.match(&#39;st&#39;));   // null&#10;console.log(str.match(/\d+/g))  // [ &#39;1&#39;, &#39;2&#39;, &#39;3&#39; ]</span><br></pre></td></tr></table></figure>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span>=<span class="string">"1 plus 2 equal 3"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">match</span>(<span class="string">'plus'</span>)); <span class="comment">// plus</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">match</span>(<span class="string">'st'</span>));   <span class="comment">// null</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">match</span>(/\d+/g))  <span class="comment">// [ '1', '2', '3' ]</span></span><br></pre></td></tr></table></figure>
 <h2 id="replace()">replace()</h2><p>替换与正则表达式匹配的子串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str=&#34;Hello WoRlD!&#34;&#10;console.log(str.replace(/WoRlD/, &#34;World&#34;));     // Hello World!&#10;&#10;var str=&#34;Hello WoRlD! &#34;&#10;str += str;&#10;console.log(str.replace(/WoRlD/g, &#34;World&#34;)); //&#26367;&#25442;&#25152;&#26377;, &#36755;&#20986;&#65306;Hello World! Hello World! &#10;&#10;var str = &#34;javascript Tutorial &#34;;&#10;console.log(str.replace(/javascript/i, &#34;JavaScript&#34;)); //&#30830;&#20445;&#21305;&#37197;&#23383;&#31526;&#20018;&#22823;&#20889;&#23383;&#31526;&#30340;&#27491;&#30830;&#10;&#10;var name = &#34;Doe, John&#34;;&#10;console.log(name.replace(/(\w+)\s*, \s*(\w+)/, &#34;$2 $1&#34;)); //&#23558;&#25226; &#34;Doe, John&#34; &#36716;&#25442;&#20026; &#34;John Doe&#34; &#30340;&#24418;&#24335;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"Hello WoRlD!"</span></span><br><span class="line">console.<span class="literal">log</span>(str.<span class="keyword">replace</span>(/WoRlD/, <span class="string">"World"</span>));     <span class="comment">// Hello World!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">"Hello WoRlD! "</span></span><br><span class="line">str += str;</span><br><span class="line">console.<span class="literal">log</span>(str.<span class="keyword">replace</span>(/WoRlD/<span class="keyword">g</span>, <span class="string">"World"</span>)); <span class="comment">//替换所有, 输出：Hello World! Hello World! </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"javascript Tutorial "</span>;</span><br><span class="line">console.<span class="literal">log</span>(str.<span class="keyword">replace</span>(/javascript/i, <span class="string">"JavaScript"</span>)); <span class="comment">//确保匹配字符串大写字符的正确</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"Doe, John"</span>;</span><br><span class="line">console.<span class="literal">log</span>(name.<span class="keyword">replace</span>(/(\w+)\s*, \s*(\w+)/, <span class="string">"$2 $1"</span>)); <span class="comment">//将把 "Doe, John" 转换为 "John Doe" 的形式</span></span><br></pre></td></tr></table></figure>
 <h2 id="search()">search()</h2><p>检索与正则表达式相匹配的值(大小写敏感)，未找到输出-1。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str=&#34;Hello World!&#34;&#10;console.log(str.search(/World/)); //&#36755;&#20986;6&#10;&#10;var str=&#34;Hello World!&#34;&#10;console.log(str.search(/world/i)); //&#24573;&#30053;&#22823;&#23567;&#20889;&#30340;&#26816;&#32034;&#65292;&#36755;&#20986;6</span><br></pre></td></tr></table></figure>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">str</span>=<span class="string">"Hello World!"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">search</span>(/World/)); <span class="comment">//输出6</span></span><br><span class="line"></span><br><span class="line">var <span class="built_in">str</span>=<span class="string">"Hello World!"</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">str</span>.<span class="built_in">search</span>(/world/i)); <span class="comment">//忽略大小写的检索，输出6</span></span><br></pre></td></tr></table></figure>
 <h2 id="slice()">slice()</h2><p>提取字符串的片断，并在新的字符串中返回被提取的部分</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str=&#34;Hello happy world!&#34;&#10;console.log(str.slice(6)); //&#36755;&#20986;happy world!&#10;console.log(str.slice(6, 11)); //&#36755;&#20986;happy</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=<span class="string">"Hello happy world!"</span></span><br><span class="line">console.<span class="built_in">log</span>(str.slice(<span class="number">6</span>)); <span class="comment">//输出happy world!</span></span><br><span class="line">console.<span class="built_in">log</span>(str.slice(<span class="number">6</span>, <span class="number">11</span>)); <span class="comment">//输出happy</span></span><br></pre></td></tr></table></figure>
 <p>默默插一句 数组也可以用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var fruits = [&#34;Banana&#34;, &#34;Orange&#34;, &#34;Lemon&#34;, &#34;Apple&#34;, &#34;Mango&#34;];&#10;var citrus = fruits.slice(1, 3);    //[ &#39;Orange&#39;, &#39;Lemon&#39; ]&#10;&#10;citrus = fruits.slice(1);   //[ &#39;Orange&#39;, &#39;Lemon&#39;, &#39;Apple&#39;, &#39;Mango&#39; ]</span><br></pre></td></tr></table></figure>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">var</span> <span class="atom">fruits</span> = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Lemon"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span><br><span class="line"><span class="atom">var</span> <span class="atom">citrus</span> = <span class="atom">fruits</span>.<span class="atom">slice</span>(<span class="number">1</span>, <span class="number">3</span>);    //[ <span class="string">'Orange'</span>, <span class="string">'Lemon'</span> ]</span><br><span class="line"></span><br><span class="line"><span class="atom">citrus</span> = <span class="atom">fruits</span>.<span class="atom">slice</span>(<span class="number">1</span>);   //[ <span class="string">'Orange'</span>, <span class="string">'Lemon'</span>, <span class="string">'Apple'</span>, <span class="string">'Mango'</span> ]</span><br></pre></td></tr></table></figure>
 <h2 id="split()">split()</h2><p>把字符串分割为字符串数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#34;|a|b|c&#34;.split(&#34;|&#34;) ////&#23558;&#36820;&#22238;[&#34;&#34;, &#34;a&#34;, &#34;b&#34;, &#34;c&#34;]&#10;&#10;&#34;How are you doing today?&#34;.split(&#34; &#34;,3) //&#36820;&#22238; How,are,you&#10;&#10;&#34;hello&#34;.split(&#34;&#34;)&#9;//&#21487;&#36820;&#22238; [&#34;h&#34;, &#34;e&#34;, &#34;l&#34;, &#34;l&#34;, &#34;o&#34;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"|a|b|c"</span>.<span class="function"><span class="title">split</span><span class="params">(<span class="string">"|"</span>)</span></span> <span class="comment">////将返回["", "a", "b", "c"]</span></span><br><span class="line"></span><br><span class="line"><span class="string">"How are you doing today?"</span>.<span class="function"><span class="title">split</span><span class="params">(<span class="string">" "</span>,<span class="number">3</span>)</span></span> <span class="comment">//返回 How,are,you</span></span><br><span class="line"></span><br><span class="line"><span class="string">"hello"</span>.<span class="function"><span class="title">split</span><span class="params">(<span class="string">""</span>)</span></span>	<span class="comment">//可返回 ["h", "e", "l", "l", "o"]</span></span><br></pre></td></tr></table></figure>
 
-            
+
+			
             <section class="comment">
-	<div class="ds-thread"></div>
-</section>
-
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2014/10/15/javascript-下常用的字符串操作/" data-title="javascript 下常用的字符串操作" data-url="http://f10.moe/2014/10/15/javascript-下常用的字符串操作/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"f10"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+var duoshuoQuery = {short_name:"f10"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
         </div>
     </div>
 </article>
@@ -159,7 +161,12 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
         Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
     </div>
         <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
-        <small>&copy; 2014 XadillaX</small>
+        <small>&copy; 2014 Minary</small>
     </footer>
+
+    
+
+
 </body>
 </html>
+

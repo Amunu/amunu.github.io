@@ -79,7 +79,6 @@ Extend the String object to create a function that converts the value of the Str
     <script>
     var backRoot = "/images/background/";
     var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
-    //console.log(backArray);
         
     $(function() {
         // page-id...
@@ -90,14 +89,13 @@ Extend the String object to create a function that converts the value of the Str
         $("#nav-" + pageId).addClass("active");
     });
     </script>
+
     <article class="post container">
     <div class="well post-body first-post last-post">
         <h1>Codewars# Base64 Encodeing</h1>
         
         <div class="time-info">
-发表于:<time datetime="2014-10-14T05:03:55.000Z" itemprop="datePublished">2014年10月14日</time>,
-更新于:<time datetime="2015-06-08T07:50:09.000Z" itemprop="dateModified">2015年06月08日</time>,
-By <a href="http://f10.moe" title="Minary">Minary</a>
+发表于:<time datetime="2014-10-14T05:03:55.000Z" itemprop="datePublished">2014-10-14</time>，更新于:<time datetime="2015-11-03T08:53:49.000Z" itemprop="dateModified">2015-11-03</time>，By <a href="http://f10.moe" title="Minary">Minary</a>
         </div>
         
         <div class="post-body-inner">
@@ -109,7 +107,7 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
             <h2 id="Description:">Description:</h2><p><a href="http://www.codewars.com/kata/5270f22f862516c686000161" target="_blank" rel="external">题目链接</a></p>
 <p>Extend the String object to create a function that converts the value of the String to and from Base64 using the ASCII character set.</p>
 <hr>
-<h2 id="Usage:">Usage:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// should return &#39;dGhpcyBpcyBhIHN0cmluZyEh&#39;&#10;&#39;this is a string!!&#39;.toBase64(); &#10;&#10;// should return &#39;this is a string!!&#39;&#10;&#39;dGhpcyBpcyBhIHN0cmluZyEh&#39;.fromBase64();</span><br></pre></td></tr></table></figure>
+<h2 id="Usage:">Usage:</h2><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// should <span class="keyword">return</span> <span class="attribute">'dGhpcyBpcyBhIHN0cmluZyEh</span>'</span><br><span class="line"><span class="attribute">'this</span> <span class="keyword">is</span> a <span class="typename">string</span>!!'.toBase64(); </span><br><span class="line"></span><br><span class="line">// should <span class="keyword">return</span> <span class="attribute">'this</span> <span class="keyword">is</span> a <span class="typename">string</span>!!'</span><br><span class="line"><span class="attribute">'dGhpcyBpcyBhIHN0cmluZyEh</span>'.fromBase64();</span><br></pre></td></tr></table></figure>
 <p>You can learn more about Base64 encoding and decoding <a href="http://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">here</a>.</p>
 <hr>
 <h2 id="Solutions:">Solutions:</h2><p>从wiki里可以看出，字符串到base64的转换步骤有四步：</p>
@@ -122,10 +120,10 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
 <p>嘛嘛！语言组织的不是很理想，可以直接<a href="http://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">戳这里</a>.</p>
 <hr>
 <p><strong>用现有的方法可以直接用下面的代码实现：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;String.prototype.toBase64 = function() &#123;&#10;  return new Buffer(this.toString()).toString(&#39;base64&#39;);&#10;&#125;&#10;&#10;String.prototype.fromBase64 = function() &#123;&#10;  return new Buffer(this.toString(), &#39;base64&#39;).toString();&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">String</span>.prototype.toBase64 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Buffer(<span class="keyword">this</span>.toString()).toString(<span class="string">'base64'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>.prototype.fromBase64 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Buffer(<span class="keyword">this</span>.toString(), <span class="string">'base64'</span>).toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>具体实现</strong></p>
 <p>找了个讨论里面最推荐的方法， 具体实现都是大同小异。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.prototype.toBase64 = function() &#123;&#10;  var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;;&#10;  var encoded = &#39;&#39;;&#10;  &#10;  for(var i=0; i &#60; this.length; i+=3) &#123;&#10;    var c1 = this.charCodeAt(i), &#10;        c2 = this.charCodeAt(i+1), &#10;        c3 = this.charCodeAt(i+2);&#10;    encoded += chars[(c1 &#38; 0xFC) &#62;&#62; 2];&#10;    encoded += chars[((c1 &#38; 0x03) &#60;&#60; 4) | ((c2 &#38; 0xF0) &#62;&#62; 4)];&#10;    encoded += chars[((c2 &#38; 0x0F) &#60;&#60; 2) | ((c3 &#38; 0xC0) &#62;&#62; 6)];&#10;    encoded += chars[c3 &#38; 0x3F];&#10;  &#125;&#10;  &#10;  return encoded;&#10;&#125;;&#10;&#10;String.prototype.fromBase64 = function() &#123;&#10;  var chars = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#39;;&#10;  var decoded = &#39;&#39;;&#10;  &#10;  for(var i=0; i &#60; this.length; i+=4) &#123;&#10;    var c1 = chars.indexOf(this[i]), &#10;        c2 = chars.indexOf(this[i+1]), &#10;        c3 = chars.indexOf(this[i+2]),&#10;        c4 = chars.indexOf(this[i+3]);&#10;    decoded += String.fromCharCode(((c1) &#60;&#60; 2) | ((c2 &#38; 0x30) &#62;&#62; 4));&#10;    decoded += String.fromCharCode(((c2 &#38; 0x0F) &#60;&#60; 4) | ((c3 &#38; 0xFC) &#62;&#62; 2));&#10;    decoded += String.fromCharCode(((c3 &#38; 0x03) &#60;&#60; 6) | c4);&#10;  &#125;&#10;  &#10;  return decoded;&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.toBase64 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span>;</span><br><span class="line">  <span class="keyword">var</span> encoded = <span class="string">''</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i+=<span class="number">3</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> c1 = <span class="keyword">this</span>.charCodeAt(i), </span><br><span class="line">        c2 = <span class="keyword">this</span>.charCodeAt(i+<span class="number">1</span>), </span><br><span class="line">        c3 = <span class="keyword">this</span>.charCodeAt(i+<span class="number">2</span>);</span><br><span class="line">    encoded += chars[(c1 &amp; <span class="number">0xFC</span>) &gt;&gt; <span class="number">2</span>];</span><br><span class="line">    encoded += chars[((c1 &amp; <span class="number">0x03</span>) &lt;&lt; <span class="number">4</span>) | ((c2 &amp; <span class="number">0xF0</span>) &gt;&gt; <span class="number">4</span>)];</span><br><span class="line">    encoded += chars[((c2 &amp; <span class="number">0x0F</span>) &lt;&lt; <span class="number">2</span>) | ((c3 &amp; <span class="number">0xC0</span>) &gt;&gt; <span class="number">6</span>)];</span><br><span class="line">    encoded += chars[c3 &amp; <span class="number">0x3F</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> encoded;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>.prototype.fromBase64 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span>;</span><br><span class="line">  <span class="keyword">var</span> decoded = <span class="string">''</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i+=<span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> c1 = chars.indexOf(<span class="keyword">this</span>[i]), </span><br><span class="line">        c2 = chars.indexOf(<span class="keyword">this</span>[i+<span class="number">1</span>]), </span><br><span class="line">        c3 = chars.indexOf(<span class="keyword">this</span>[i+<span class="number">2</span>]),</span><br><span class="line">        c4 = chars.indexOf(<span class="keyword">this</span>[i+<span class="number">3</span>]);</span><br><span class="line">    decoded += <span class="built_in">String</span>.fromCharCode(((c1) &lt;&lt; <span class="number">2</span>) | ((c2 &amp; <span class="number">0x30</span>) &gt;&gt; <span class="number">4</span>));</span><br><span class="line">    decoded += <span class="built_in">String</span>.fromCharCode(((c2 &amp; <span class="number">0x0F</span>) &lt;&lt; <span class="number">4</span>) | ((c3 &amp; <span class="number">0xFC</span>) &gt;&gt; <span class="number">2</span>));</span><br><span class="line">    decoded += <span class="built_in">String</span>.fromCharCode(((c3 &amp; <span class="number">0x03</span>) &lt;&lt; <span class="number">6</span>) | c4);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> decoded;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><strong>解释上面的代码：</strong></p>
 <ol>
 <li><p>Base64 cording 表：</p>
@@ -137,10 +135,10 @@ c<span class="number">2</span> = this.charCodeAt<span class="comment">(i+1)</spa
 c<span class="number">3</span> = this.charCodeAt<span class="comment">(i+2)</span>;
 </code></pre></li>
 <li><p>字符处理：</p>
-<pre><code>encoded += chars[<span class="params">(c1 &amp; <span class="number">0</span>xFC)</span> &gt;&gt; <span class="number">2</span>];
-encoded += chars[<span class="params">(<span class="params">(c1 &amp; <span class="number">0</span>x03)</span> &lt;&lt; <span class="number">4</span>)</span> | <span class="params">(<span class="params">(c2 &amp; <span class="number">0</span>xF0)</span> &gt;&gt; <span class="number">4</span>)</span>];
-encoded += chars[<span class="params">(<span class="params">(c2 &amp; <span class="number">0</span>x0F)</span> &lt;&lt; <span class="number">2</span>)</span> | <span class="params">(<span class="params">(c3 &amp; <span class="number">0</span>xC0)</span> &gt;&gt; <span class="number">6</span>)</span>];
-encoded += chars[c3 &amp; <span class="number">0</span>x3F];
+<pre><code>encoded += chars[(c1 &amp; <span class="number">0xFC</span>) &gt;&gt; <span class="number">2</span>];
+encoded += chars[((c1 &amp; <span class="number">0x03</span>) &lt;&lt; <span class="number">4</span>) | ((c2 &amp; <span class="number">0xF0</span>) &gt;&gt; <span class="number">4</span>)];
+encoded += chars[((c2 &amp; <span class="number">0x0F</span>) &lt;&lt; <span class="number">2</span>) | ((c3 &amp; <span class="number">0xC0</span>) &gt;&gt; <span class="number">6</span>)];
+encoded += chars[c3 &amp; <span class="number">0x3F</span>];
 </code></pre></li>
 </ol>
 <p><code>(c1 &amp; 0xFC) &gt;&gt; 2</code> ：<em>0xFC</em> 为十六进制，转换为二进制为 <em>11111100</em> , 将 <em>c1</em>  <strong>按位与</strong> <em>11111100</em> （&amp;是按位与）, 结果就是高6位保持不变，低两位清0。<strong>&gt;&gt;2</strong> 是右移两位，就是把高6位移到低6位。</p>
@@ -153,22 +151,26 @@ encoded += chars[c3 &amp; <span class="number">0</span>x3F];
 <p>  Javascript 的一个典型弱点就是 <em>位运算</em> 。Javascript 的位运算是参照 <em>Java</em> 的位算法实现的， 但是 <em>Java</em> 位运算是在 int 型数字的基础上运行的， 而 Javascript 中只有 double 型的数据类型， 在进行位运算的过程中， 需要将 double 型转换成 int 型， 然后再进行。 所以 Javascript 层面上做位运算效率不高。</p>
 <p>  在应用中， 会频繁出现位运算的需求， 包括 <em>转码</em> , <em>编码</em> 的过程， 如果通过 Javascript 来实现， CPU 资源将会耗费很多， 这时编写 <em>C/C++</em> 扩展模块来提升性能的机会就来了。</p>
 
-            
-            <section class="comment">
-	<div class="ds-thread"></div>
-</section>
 
+			
+            <section class="comment">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2014/10/14/Base64-Encodeing/" data-title="Codewars# Base64 Encodeing" data-url="http://f10.moe/2014/10/14/Base64-Encodeing/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"f10"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+var duoshuoQuery = {short_name:"f10"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
         </div>
     </div>
 </article>
@@ -178,7 +180,12 @@ encoded += chars[c3 &amp; <span class="number">0</span>x3F];
         Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
     </div>
         <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
-        <small>&copy; 2014 XadillaX</small>
+        <small>&copy; 2014 Minary</small>
     </footer>
+
+    
+
+
 </body>
 </html>
+

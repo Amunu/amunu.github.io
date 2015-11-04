@@ -78,7 +78,6 @@
     <script>
     var backRoot = "/images/background/";
     var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
-    //console.log(backArray);
         
     $(function() {
         // page-id...
@@ -89,14 +88,13 @@
         $("#nav-" + pageId).addClass("active");
     });
     </script>
+
     <article class="post container">
     <div class="well post-body first-post last-post">
         <h1>Codewars#Did you mean ...?</h1>
         
         <div class="time-info">
-发表于:<time datetime="2014-10-15T10:11:47.000Z" itemprop="datePublished">2014年10月15日</time>,
-更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
-By <a href="http://f10.moe" title="Minary">Minary</a>
+发表于:<time datetime="2014-10-15T10:11:47.000Z" itemprop="datePublished">2014-10-15</time>，更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015-06-08</time>，By <a href="http://f10.moe" title="Minary">Minary</a>
         </div>
         
         <div class="post-body-inner">
@@ -109,7 +107,7 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
 <p>You’ll get an entered term (lowercase string) and an array of known words (also lowercase strings). Your task is to find out, which word from the dictionary is most similar to the entered one. The similarity is described by the minimum number of letters you have to add, remove or replace in order to get from the entered word to one of the dictionary. The lower the number of required changes, the higher the similarity between each two words.</p>
 <p>Same words are obviously the most similar ones. A word that needs one letter to be changed is more similar to another word that needs 2 (or more) letters to be changed. E.g. the mistyped term berr is more similar to beer (1 letter to be replaced) than to barrel (3 letters to be changed in total).</p>
 <p>Extend the dictionary in a way, that it is able to return you the most similar word from the list of known words.</p>
-<h2 id="Code_Examples:">Code Examples:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruits = new Dictionary([&#39;cherry&#39;, &#39;pineapple&#39;, &#39;melon&#39;, &#39;strawberry&#39;, &#39;raspberry&#39;]);&#10;fruits.findMostSimilar(&#39;strawbery&#39;); // must return &#34;strawberry&#34;&#10;fruits.findMostSimilar(&#39;berry&#39;); // must return &#34;cherry&#34;&#10;---&#10;things = new Dictionary([&#39;stars&#39;, &#39;mars&#39;, &#39;wars&#39;, &#39;codec&#39;, &#39;codewars&#39;]);&#10;things.findMostSimilar(&#39;coddwars&#39;); // must return &#34;codewars&#34;&#10;---&#10;languages = new Dictionary([&#39;javascript&#39;, &#39;java&#39;, &#39;ruby&#39;, &#39;php&#39;, &#39;python&#39;, &#39;coffeescript&#39;]);&#10;languages.findMostSimilar(&#39;heaven&#39;); // must return &#34;java&#34;&#10;languages.findMostSimilar(&#39;javascript&#39;); // must return &#34;javascript&#34; (same words are obviously the most similar ones)&#10;I know, many of you would disagree that java is more similar to heaven than all the other ones, but in this kata it is ;)</span><br></pre></td></tr></table></figure>
+<h2 id="Code_Examples:">Code Examples:</h2><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fruits = <span class="keyword">new</span> Dictionary([<span class="attribute">'cherry</span>', <span class="attribute">'pineapple</span>', <span class="attribute">'melon</span>', <span class="attribute">'strawberry</span>', <span class="attribute">'raspberry</span>']);</span><br><span class="line">fruits.findMostSimilar(<span class="attribute">'strawbery</span>'); // must <span class="keyword">return</span> <span class="string">"strawberry"</span></span><br><span class="line">fruits.findMostSimilar(<span class="attribute">'berry</span>'); // must <span class="keyword">return</span> <span class="string">"cherry"</span></span><br><span class="line"><span class="comment">---</span></span><br><span class="line">things = <span class="keyword">new</span> Dictionary([<span class="attribute">'stars</span>', <span class="attribute">'mars</span>', <span class="attribute">'wars</span>', <span class="attribute">'codec</span>', <span class="attribute">'codewars</span>']);</span><br><span class="line">things.findMostSimilar(<span class="attribute">'coddwars</span>'); // must <span class="keyword">return</span> <span class="string">"codewars"</span></span><br><span class="line"><span class="comment">---</span></span><br><span class="line">languages = <span class="keyword">new</span> Dictionary([<span class="attribute">'javascript</span>', <span class="attribute">'java</span>', <span class="attribute">'ruby</span>', <span class="attribute">'php</span>', <span class="attribute">'python</span>', <span class="attribute">'coffeescript</span>']);</span><br><span class="line">languages.findMostSimilar(<span class="attribute">'heaven</span>'); // must <span class="keyword">return</span> <span class="string">"java"</span></span><br><span class="line">languages.findMostSimilar(<span class="attribute">'javascript</span>'); // must <span class="keyword">return</span> <span class="string">"javascript"</span> (same words are obviously the most similar ones)</span><br><span class="line">I know, many <span class="keyword">of</span> you would disagree that java <span class="keyword">is</span> more similar <span class="keyword">to</span> heaven than <span class="keyword">all</span> the other ones, but <span class="keyword">in</span> this kata it <span class="keyword">is</span> ;)</span><br></pre></td></tr></table></figure>
 <h2 id="Additional_notes:">Additional notes:</h2><p>there is always exactly one possible solution</p>
 <h2 id="Solutions:">Solutions:</h2><p>解决这题的方法是用一个已经存在的算法， 叫做Levenshtein距离，又称<a href="http://en.wikipedia.org/wiki/Levenshtein_distance" target="_blank" rel="external">编辑距离</a> 。</p>
 <p>具体的步骤就是：（假设两个字符串为 ‘heaven’ ，’java’）</p>
@@ -131,25 +129,29 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
 <p><strong>最终效果：</strong></p>
 <table class="table table-striped-white table-bordered"><thead><tr><th>0</th><th style="text-align:center;">j(1)</th><th style="text-align:center;">a(2)</th><th style="text-align:center;">v(3)</th><th>a(4)</th></tr></thead><tbody><tr><td>h(1)</td><td style="text-align:center;">1</td><td style="text-align:center;">2</td><td style="text-align:center;">3</td><td style="text-align:center;">3</td></tr><tr><td>e(2)</td><td style="text-align:center;">2</td><td style="text-align:center;">2</td><td style="text-align:center;">3</td><td style="text-align:center;">4</td></tr><tr><td>a(3)</td><td style="text-align:center;">3</td><td style="text-align:center;">2</td><td style="text-align:center;">3</td><td style="text-align:center;">3</td></tr><tr><td>v(4)</td><td style="text-align:center;">4</td><td style="text-align:center;">3</td><td style="text-align:center;">2</td><td style="text-align:center;">3</td></tr><tr><td>e(5)</td><td style="text-align:center;">5</td><td style="text-align:center;">4</td><td style="text-align:center;">3</td><td style="text-align:center;">3</td></tr><tr><td>n(6)</td><td style="text-align:center;">6</td><td style="text-align:center;">5</td><td style="text-align:center;">4</td><td style="text-align:center;">4</td></tr></tbody></table>
 
-<h2 id="Demo:">Demo:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var CalcDistance = function(source, target)&#10;&#123;&#10;    var n = source.length;&#10;    var m = target.length;&#10;    if (m == 0) return n;&#10;    if (n == 0) return m;&#10;    var matrix = [];&#10;    var l = n &#62; m ? n : m;&#10;    for(var i = 0;i &#60;= l;i ++) &#9;&#9;matrix.push([]);&#10;    for (var i = 1; i &#60;= n; i++)&#9;matrix[i][0] = i;&#10;    for (var i = 1; i &#60;= m; i++)&#9;matrix[0][i] = i;&#10;    matrix[0][0] = 0;&#10;&#10;    for (var i = 1; i &#60;= n; i++)&#10;    &#123;&#10;        for (var j = 1; j &#60;= m; j++)&#10;        &#123;&#10;            var cost;&#10;            &#10;            if (source[i - 1] == target[j - 1])&#9;cost = 0;&#10;            else cost = 1;&#10;&#10;            var above = matrix[i - 1][j] + 1;&#10;            var left = matrix[i][j - 1] + 1;&#10;            var diag = matrix[i - 1][j - 1] + cost;&#10;           &#9;matrix[i][j] = Math.min(above, Math.min(left, diag));&#10;        &#125;&#10;    &#125; &#10;    return matrix[n][m];&#10;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function Dictionary(words) &#123;&#10;  this.words = words;&#10;&#125;&#10;&#10;Dictionary.prototype.findMostSimilar = function(term) &#123;&#10;   var mi, nu;&#10;   for (var i = 0; i &#60; this.words.length; i++) &#123;&#10;   &#9;  var count = CalcDistance(this.words[i], term);&#10;   &#9;  if(i === 0) &#123;&#9;mi = i,&#9;nu = count;&#125;&#10;   &#9;  else if(nu &#62; count) &#123;mi = i, nu = count;&#125;&#10;   &#125;;&#10;   return(this.words[mi]);&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Demo:">Demo:</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> CalcDistance = function(source, target)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">n</span> = source.length;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">m</span> = target.length;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">m</span> == 0) <span class="keyword">return</span> <span class="keyword">n</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">n</span> == 0) <span class="keyword">return</span> <span class="keyword">m</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">matrix</span> = [];</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">l</span> = <span class="keyword">n</span> &gt; <span class="keyword">m</span> ? <span class="keyword">n</span> : <span class="keyword">m</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = 0;i &lt;= <span class="keyword">l</span>;i ++) 		<span class="keyword">matrix</span>.push([]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = 1; i &lt;= <span class="keyword">n</span>; i++)	<span class="keyword">matrix</span>[i][0] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = 1; i &lt;= <span class="keyword">m</span>; i++)	<span class="keyword">matrix</span>[0][i] = i;</span><br><span class="line">    <span class="keyword">matrix</span>[0][0] = 0;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = 1; i &lt;= <span class="keyword">n</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = 1; j &lt;= <span class="keyword">m</span>; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> cost;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (source[i - 1] == target[j - 1])	cost = 0;</span><br><span class="line">            <span class="keyword">else</span> cost = 1;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> above = <span class="keyword">matrix</span>[i - 1][j] + 1;</span><br><span class="line">            <span class="keyword">var</span> left = <span class="keyword">matrix</span>[i][j - 1] + 1;</span><br><span class="line">            <span class="keyword">var</span> diag = <span class="keyword">matrix</span>[i - 1][j - 1] + cost;</span><br><span class="line">           	<span class="keyword">matrix</span>[i][j] = Math.<span class="literal">min</span>(above, Math.<span class="literal">min</span>(left, diag));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">matrix</span>[<span class="keyword">n</span>][<span class="keyword">m</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dictionary</span><span class="params">(words)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.words = words;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dictionary.prototype.findMostSimilar = <span class="function"><span class="keyword">function</span><span class="params">(term)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> mi, nu;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.words.length; i++) &#123;</span><br><span class="line">   	  <span class="keyword">var</span> count = CalcDistance(<span class="keyword">this</span>.words[i], term);</span><br><span class="line">   	  <span class="keyword">if</span>(i === <span class="number">0</span>) &#123;	mi = i,	nu = count;&#125;</span><br><span class="line">   	  <span class="keyword">else</span> <span class="keyword">if</span>(nu &gt; count) &#123;mi = i, nu = count;&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span>(<span class="keyword">this</span>.words[mi]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-            
+
+			
             <section class="comment">
-	<div class="ds-thread"></div>
-</section>
-
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2014/10/15/Did-you-mean/" data-title="Codewars#Did you mean ...?" data-url="http://f10.moe/2014/10/15/Did-you-mean/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"f10"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+var duoshuoQuery = {short_name:"f10"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
         </div>
     </div>
 </article>
@@ -159,7 +161,12 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
         Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
     </div>
         <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
-        <small>&copy; 2014 XadillaX</small>
+        <small>&copy; 2014 Minary</small>
     </footer>
+
+    
+
+
 </body>
 </html>
+

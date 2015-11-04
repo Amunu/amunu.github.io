@@ -7,7 +7,7 @@
     <meta name="author" content="Minary">
     
     <meta name="description" content="作用域和闭包相信接触过编程的人，大多都是知道作用域的，像下面两个关于全局变量和本地变量的例子：
-1//&amp;#23450;&amp;#20041;&amp;#20840;&amp;#23616;&amp;#21464;&amp;#37327;&amp;#10;var name = &amp;#34;Minary&amp;#34;;&amp;#10;var age = 21;">
+1234//定义全局变量var name = &quot;Minary&quot;;var age = 21;console.log(&quot;Hello &quot; + name + &quot;.  Wow, you are &quot; + age + ">
     
     
 
@@ -79,7 +79,6 @@
     <script>
     var backRoot = "/images/background/";
     var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
-    //console.log(backArray);
         
     $(function() {
         // page-id...
@@ -90,14 +89,13 @@
         $("#nav-" + pageId).addClass("active");
     });
     </script>
+
     <article class="post container">
     <div class="well post-body first-post last-post">
         <h1>What is "this"?</h1>
         
         <div class="time-info">
-发表于:<time datetime="2015-01-26T06:14:46.000Z" itemprop="datePublished">2015年01月26日</time>,
-更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
-By <a href="http://f10.moe" title="Minary">Minary</a>
+发表于:<time datetime="2015-01-26T06:14:46.000Z" itemprop="datePublished">2015-01-26</time>，更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015-06-08</time>，By <a href="http://f10.moe" title="Minary">Minary</a>
         </div>
         
         <div class="post-body-inner">
@@ -107,10 +105,10 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
             </div>
             
             <h3 id="作用域和闭包">作用域和闭包</h3><p>相信接触过编程的人，大多都是知道作用域的，像下面两个关于全局变量和本地变量的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23450;&#20041;&#20840;&#23616;&#21464;&#37327;&#10;var name = &#34;Minary&#34;;&#10;var age = 21;&#10;console.log(&#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义全局变量</span></span><br><span class="line"><span class="variable"><span class="keyword">var</span> name</span> = <span class="string">"Minary"</span>;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> age</span> = <span class="number">21</span>;</span><br><span class="line">console.log(<span class="string">"Hello "</span> + name + <span class="string">".  Wow, you are "</span> + age + <span class="string">" years old."</span>);</span><br></pre></td></tr></table></figure>
 <p>上面输出： Hello Minary.  Wow, you are 21 years old.</p>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#23450;&#20041;&#26412;&#22320;&#21464;&#37327;&#10;function newScope() &#123;&#10;  var name = &#34;Minary&#34;;&#10;  var age = 21;&#10;&#125;&#10;console.log(&#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义本地变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"Minary"</span>;</span><br><span class="line">  <span class="keyword">var</span> age = <span class="number">21</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Hello "</span> + name + <span class="string">".  Wow, you are "</span> + age + <span class="string">" years old."</span>);</span><br></pre></td></tr></table></figure>
 <p>上面的例子会报 name is not defined 的错误。因为尝试从全局范围中获取本地变量。</p>
 <hr>
 <p><strong>作用域是闭包实现的关键</strong>，下面是 wiki 对闭包和作用域的解释：</p>
@@ -118,58 +116,62 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
 <p>In computer science, a closure is a first-class function with free variables that are bound in the lexical environment. Such a function is said to be “closed over” its free variables. A closure is defined within the scope of its free variables, and the extent of those variables is at least as long as the lifetime of the closure itself.</p>
 </blockquote>
 <p>什么意思呢？ 可以看下面的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = &#34;outer&#34;;&#10;function one() &#123;&#10;  var name = &#34;middle&#34;;&#10;  var other = &#34;findme&#34;;&#10;  function two() &#123;&#10;    var name = &#34;inner&#34;;&#10;    // &#36825;&#37324; `name` &#20026; &#34;inner&#34; &#65292;`other` &#20026; &#34;findme&#34;&#10;    console.dir(&#123;name: name, other: other&#125;);&#10;  &#125;&#10;  two();&#10;  // &#36825;&#37324; `name` &#20026; &#34;middle&#34; &#65292;`other` &#20026; &#34;findme&#34;&#10;  console.dir(&#123;name: name, other: other&#125;);&#10;&#125;&#10;one();&#10;// &#36825;&#37324; `name` &#20026; &#34;outer&#34; &#65292;`other` &#20026; undefined.&#10;console.dir(&#123;name: name&#125;);&#10;console.dir(&#123;other: other&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"outer"</span><span class="comment">;</span></span><br><span class="line">function one() &#123;</span><br><span class="line">  var name = <span class="string">"middle"</span><span class="comment">;</span></span><br><span class="line">  var other = <span class="string">"findme"</span><span class="comment">;</span></span><br><span class="line">  function two() &#123;</span><br><span class="line">    var name = <span class="string">"inner"</span><span class="comment">;</span></span><br><span class="line">    // 这里 <span class="escape">`n</span>ame<span class="escape">` </span>为 <span class="string">"inner"</span> ，<span class="escape">`o</span>ther<span class="escape">` </span>为 <span class="string">"findme"</span></span><br><span class="line"><span class="label">    console.dir(&#123;name: name, other:</span> other&#125;)<span class="comment">;</span></span><br><span class="line">  &#125;</span><br><span class="line">  two()<span class="comment">;</span></span><br><span class="line">  // 这里 <span class="escape">`n</span>ame<span class="escape">` </span>为 <span class="string">"middle"</span> ，<span class="escape">`o</span>ther<span class="escape">` </span>为 <span class="string">"findme"</span></span><br><span class="line"><span class="label">  console.dir(&#123;name: name, other:</span> other&#125;)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">one()<span class="comment">;</span></span><br><span class="line">// 这里 <span class="escape">`n</span>ame<span class="escape">` </span>为 <span class="string">"outer"</span> ，<span class="escape">`o</span>ther<span class="escape">` </span>为 undefined.</span><br><span class="line"><span class="label">console.dir(&#123;name:</span> name&#125;)<span class="comment">;</span></span><br><span class="line"><span class="label">console.dir(&#123;other:</span> other&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <p>也就是说本地作用域可以访问全局变量， 但是全局作用域不可以访问本地变量。 本地变量可以重新定义一个和全局变量一样名字的变量， 这时候再在本地作用域内访问像上面 <code>name</code> 一样的变量时，全局的 <code>name</code> 被本地覆盖。 但是出了这个本地作用域， 全局变量仍未改变。</p>
 <hr>
 <p>那么要怎么访问本地作用域里的变量呢？看下面这个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#26032;&#24314;&#19968;&#20010;&#20989;&#25968;&#24182; return &#19968;&#20010;&#38381;&#21253;&#20989;&#25968;&#10;function myModule() &#123;&#10;  var name = &#34;Minary&#34;, age = 21;&#10;  return function greet() &#123;&#10;    return &#34;Hello &#34; + name + &#34;.  Wow, you are &#34; + age + &#34; years old.&#34;;&#10;  &#125;&#10;&#125;&#10;// call `myModule` to get a closure out of it.&#10;var greeter = myModule();&#10;// Call the closure&#10;greeter();</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新建一个函数并 return 一个闭包函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"Minary"</span>, age = <span class="number">21</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">greet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello "</span> + name + <span class="string">".  Wow, you are "</span> + age + <span class="string">" years old."</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// call `myModule` to get a closure out of it.</span></span><br><span class="line"><span class="keyword">var</span> greeter = myModule();</span><br><span class="line"><span class="comment">// Call the closure</span></span><br><span class="line">greeter();</span><br></pre></td></tr></table></figure>
 <p><code>name</code> 和 <code>age</code> 变量是 <code>MyModule</code> 函数里的本地变量， 但是我们在全局作用域里通过执行 <code>greeter</code> 来访问，就不会报错。<br>这是因为 <code>greet</code> 函数的作用域里本来就有 <code>name</code> 和 <code>age</code> 这两个变量，所以直接访问不会报错。<br>基本上变量都是从它的作用域里获取所请求的变量。</p>
 <h3 id="this">this</h3><p>除了作用域，JavaScript 增加了另一层特殊的作用域，通过特殊的关键字 <code>this</code> 来实现。这个关键字的用法除了不能被修改，其他看起来和普通的变量一样。<br>它作为一个对象，你可以通过正常点或括号，得到它的属性。神奇的是， <code>this</code> 的值取决于调用它的情况。一般情况下，它的值就是接收到的信息。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Person = &#123;&#10;  name: &#34;Minary&#34;,&#10;  age: 21,&#10;  greeting: function () &#123;&#10;    return &#34;Hello &#34; + this.name + &#34;.  Wow, you are &#34; + this.age + &#34; years old.&#34;;&#10;  &#125;&#10;&#125;;&#10;&#10;Person.greeting(); //&#39;Hello Minary.  Wow, you are 21 years old.&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  name: <span class="string">"Minary"</span>,</span><br><span class="line">  age: <span class="number">21</span>,</span><br><span class="line">  greeting: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello "</span> + <span class="keyword">this</span>.name + <span class="string">".  Wow, you are "</span> + <span class="keyword">this</span>.age + <span class="string">" years old."</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Person.greeting(); <span class="comment">//'Hello Minary.  Wow, you are 21 years old.'</span></span><br></pre></td></tr></table></figure>
 <p>上面的代码看起来 <code>this</code> 几乎像其他语言中的对象, 这说明被他骗了。作为这个 <code>Person</code> 对象的创造者， 你没有把握 <code>this</code> 会和 <code>Person</code> 一样， 比方说, 想在把 <code>greeting</code> 函数把保存在其他地方：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var greeting = Person.greeting;&#10;greeting(); // &#39;Hello undefined.  Wow, you are undefined years old.&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> greeting</span> = Person.greeting;</span><br><span class="line">greeting(); <span class="comment">// 'Hello undefined.  Wow, you are undefined years old.'</span></span><br></pre></td></tr></table></figure>
 <p><code>this.name</code> 和 <code>this.age</code> 就会为 <code>undefined</code>， 这是因为在 <code>greeting</code> 函数现在在全局对象里， 而不是 <code>Person</code> 对象里。 因此这里的 <code>this.name</code> 和 <code>this.age</code> 是在全局范围里找, 所以是找不到的。</p>
 <p>所以下面这个例子就可以了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Dog = &#123;&#10;  name: &#34;Dog&#34;,&#10;  age: 2,&#10;  greeting: Person.greeting&#10;&#125;&#10;&#10;Dog.greeting(); // &#39;Hello Dog.  Wow, you are 2 years old.&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> Dog</span> = &#123;</span><br><span class="line">  name: <span class="string">"Dog"</span>,</span><br><span class="line">  age: <span class="number">2</span>,</span><br><span class="line">  greeting: Person.greeting</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.greeting(); <span class="comment">// 'Hello Dog.  Wow, you are 2 years old.'</span></span><br></pre></td></tr></table></figure>
 <p>因为这时候 this 会在 <code>Dog</code> 作用域里找。</p>
 <h3 id="驯服_this">驯服 this</h3><p>先看下面的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Alien = &#123;&#10;  name: &#34;Zygoff&#34;,&#10;  age: 5432&#10;&#125;&#10;&#10;Person.greeting.call(Alien); // &#39;Hello Zygoff.  Wow, you are 5432 years old.&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var Alien = &#123;</span><br><span class="line">  name: <span class="string">"Zygoff"</span>,</span><br><span class="line">  age: 5432</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.greeting.<span class="keyword">call</span>(Alien); <span class="comment">// 'Hello Zygoff.  Wow, you are 5432 years old.'</span></span><br></pre></td></tr></table></figure>
 <p>对比一下之前的例子， 上面这个 <code>Alien</code> 对象里没有半句关于 <code>greeting</code> 函数， 但是我们仍旧可以使用它。<br>这是因为我们 <code>call</code> 了 <code>Person.greeting</code> 函数， 但是却把 <code>Alicn</code> 的值作为 <code>this</code> 注入。<br>我们还可以用 <code>apply</code> ，用法和上面的例子类似在没有额外的参数下。</p>
 <hr>
 <p>让我们写个类函数可以被其他包含有 <code>name</code> 和 <code>age</code> 的对象使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function makeOlder(years, newname) &#123;&#10;  this.age += years;&#10;  if (newname) &#123;&#10;    this.name = newname;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeOlder</span><span class="params">(years, newname)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.age += years;</span><br><span class="line">  <span class="keyword">if</span> (newname) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = newname;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以通过 call 或者 apply 来调用它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makeOlder.call(Person, 2, &#34;Old Tim&#34;);&#10;makeOlder.apply(Dog, [1, &#34;Shaggy&#34;]);&#10;console.dir(&#123;Person: Person, Dog: Dog&#125;); //&#123; Person: &#123; name: &#39;Old Tim&#39;, age: 30, greeting: [Function] &#125;,Dog: &#123; name: &#39;Shaggy&#39;, age: 111, greeting: [Function] &#125; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">makeOlder.call(Person, <span class="number">2</span>, <span class="string">"Old Tim"</span>);</span><br><span class="line">makeOlder.apply(Dog, [<span class="number">1</span>, <span class="string">"Shaggy"</span>]);</span><br><span class="line">console.dir(&#123;Person: Person, Dog: Dog&#125;); //&#123; Person: &#123; name: <span class="string">'Old Tim'</span>, age: <span class="number">30</span>, greeting: [Function] &#125;,Dog: &#123; name: <span class="string">'Shaggy'</span>, age: <span class="number">111</span>, greeting: [Function] &#125; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="绑定_“this”">绑定 “this”</h3><p>有时候我们更喜欢OPP风格的代码并想让JS也这样做。 我们并不喜欢 <code>this</code> 的改变取决于调用的时间。下面一个jQuery的简单例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cart = &#123;&#10;  items: [1,4,2],&#10;  onClick: function () &#123;&#10;    // Do something with this.items.&#10;  &#125;&#10;&#125;&#10;$(&#34;#mybutton&#34;).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Cart = &#123;</span><br><span class="line">  items: [<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>],</span><br><span class="line">  onClick: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Do something with this.items.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#mybutton"</span>).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
 <p>虽然上面的看起来不错，其实有个大坑等着你。 尽管已经有了 <code>Cart.onClick</code> ，我们先不调用它。 jQuery代码将接受的是一些参数，在这一点上它没有办法知道 <code>onClick</code> 是来自 <code>Cart</code> 的对象。你的 <code>this</code> 最后并不会像你期望的那样被called。</p>
 <p>结合之前的闭包和作用域的知识让这个 <code>this</code> 就像它在大多数面向对象的语言那样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#mybutton&#34;).click(function () &#123; Cart.onClick() &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#mybutton"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; Cart.onClick() &#125;);</span><br></pre></td></tr></table></figure>
 <p>我们创建了一个闭包然后调用 <code>Cart.onClick()</code> ， 现在没有任何的参数和返回值， 可以改成下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#mybutton&#34;).click(function () &#123; return Cart.onClick.apply(Cart, arguments) &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#mybutton"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> Cart.onClick.apply(Cart, <span class="built_in">arguments</span>) &#125;);</span><br></pre></td></tr></table></figure>
 <p>现在已经成功了，但是如果你不知道 <code>arguments</code> 是另一个关键字（一个类似数组的对象包含了当前最内部函数的参数<br>）代码就会变得难度难懂。</p>
 <p>如果 <code>Cart</code> 是个全局访问的单个对象，我们可以只使用变量 <code>Cart</code> 而不是依靠 <code>this</code> 。 但往往并不会这样，当你有“类”的对象共享的功能。</p>
 <p>可以按下面那样修改 <code>Cart.onClick</code> 来使这个 <code>this</code> 一直在 <code>Cart</code> 里。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function bind(fn, scope) &#123;&#10;  return function () &#123;&#10;    return fn.apply(scope, arguments);&#10;  &#125;&#10;&#125;&#10;Cart.onClick = bind(Cart.onClick, Cart);&#10;$(&#34;#mybutton&#34;).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, scope</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fn.apply(scope, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Cart.onClick = bind(Cart.onClick, Cart);</span><br><span class="line">$(<span class="string">"#mybutton"</span>).click(Cart.onClick);</span><br></pre></td></tr></table></figure>
 <p>这里有很多种方式都能实现这样的效果，事实上他不是最好的解决方法。在上面，我们创建了一个闭包并把范围嵌在里面， 然后我们通过绑定闭包和使用 <code>apply</code> 自动传入参数并且自动返回值来替换 <code>Cart.onClick</code> 。</p>
 <h3 id="link">link</h3><p><a href="http://howtonode.org/what-is-this" target="_blank" rel="external">http://howtonode.org/what-is-this</a></p>
 
-            
-            <section class="comment">
-	<div class="ds-thread"></div>
-</section>
 
+			
+            <section class="comment">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2015/01/26/What-is-this/" data-title="What is &quot;this&quot;?" data-url="http://f10.moe/2015/01/26/What-is-this/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"f10"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+var duoshuoQuery = {short_name:"f10"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
         </div>
     </div>
 </article>
@@ -179,7 +181,12 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
         Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
     </div>
         <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
-        <small>&copy; 2014 XadillaX</small>
+        <small>&copy; 2014 Minary</small>
     </footer>
+
+    
+
+
 </body>
 </html>
+

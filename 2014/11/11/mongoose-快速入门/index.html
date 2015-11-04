@@ -80,7 +80,6 @@
     <script>
     var backRoot = "/images/background/";
     var backArray = [ "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg", "5.jpeg", "6.jpg", "7.jpg", "8.jpeg", "9.jpeg", "10.jpg", "11.jpg", "12.jpg", "14.jpeg", "15.jpeg", "16.jpeg", "17.jpg", "18.jpg", "19.jpeg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg",  ];
-    //console.log(backArray);
         
     $(function() {
         // page-id...
@@ -91,14 +90,13 @@
         $("#nav-" + pageId).addClass("active");
     });
     </script>
+
     <article class="post container">
     <div class="well post-body first-post last-post">
         <h1>mongoose 快速入门</h1>
         
         <div class="time-info">
-发表于:<time datetime="2014-11-11T10:51:18.000Z" itemprop="datePublished">2014年11月11日</time>,
-更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015年06月08日</time>,
-By <a href="http://f10.moe" title="Minary">Minary</a>
+发表于:<time datetime="2014-11-11T10:51:18.000Z" itemprop="datePublished">2014-11-11</time>，更新于:<time datetime="2015-06-08T03:37:36.000Z" itemprop="dateModified">2015-06-08</time>，By <a href="http://f10.moe" title="Minary">Minary</a>
         </div>
         
         <div class="post-body-inner">
@@ -112,55 +110,59 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/test'</span>);</span><br></pre></td></tr></table></figure>
 <hr>
 <p> 当然，需要检测连接数据库时数据库是否有报错，于是就可以用回调的方式来操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var db = mongoose.connection;&#10;db.on(&#39;error&#39;, console.error.bind(console, &#39;connection error:&#39;));&#10;db.once(&#39;open&#39;, function callback () &#123;&#10;&#9;  // &#25104;&#21151;&#36830;&#25509;&#65292;&#24182;&#36827;&#34892;&#30456;&#24212;&#25805;&#20316;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db = mongoose.connection;</span><br><span class="line">db.on(<span class="string">'error'</span>, <span class="built_in">console</span>.error.bind(<span class="built_in">console</span>, <span class="string">'connection error:'</span>));</span><br><span class="line">db.once(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span> <span class="title">callback</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	  <span class="comment">// 成功连接，并进行相应操作</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <hr>
-<p> 假设，现在连接成功了(所以接下来的代码是写在 <code>db.once(&#39;open&#39;, callback(){...})</code> 的回调里面的)。 在 Mongoose 中， 任何一切都是来自于 <a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">Schema</a>, 所以就获取它的引用并且定义我们自己的结构吧！（也可以把这里认为是在定义表的结构）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Testschema = mongoose.Schema(&#123;&#10;  name: String&#10;&#125;);</span><br></pre></td></tr></table></figure></p>
+<p> 假设，现在连接成功了(所以接下来的代码是写在 <code>db.once(&#39;open&#39;, callback(){...})</code> 的回调里面的)。 在 Mongoose 中， 任何一切都是来自于 <a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">Schema</a>, 所以就获取它的引用并且定义我们自己的结构吧！（也可以把这里认为是在定义表的结构）<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Testschema = mongoose.Schema(&#123;</span><br><span class="line">  name: <span class="built_in">String</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p> 现在已经新建了一个 Testschema， 接下来把它用到 <a href="http://mongoosejs.com/docs/models.html" target="_blank" rel="external">Model</a> 中。（可以认为是在定义 Testschema 结构的表）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Test = mongoose.model(&#39;Test&#39;, Testschema);</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">Test</span> = mongoose.model('<span class="keyword">Test</span>', Testschema);</span><br></pre></td></tr></table></figure>
 <hr>
 <p> 这个 Test 是构建文件的类，接下来创建一个 Test 的实例， 就可以了0. 0（可以认为是在定义要插入等操作的数据）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var test  = new Test(&#123; name: &#39;miao&#39; &#125;)&#10;console.log(test.name) // &#39;miao&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">var</span> test  = new <span class="function"><span class="title">Test</span><span class="params">(&#123; name: <span class="string">'miao'</span> &#125;)</span></span></span><br><span class="line">console.<span class="function"><span class="title">log</span><span class="params">(test.name)</span></span> <span class="comment">// 'miao'</span></span><br></pre></td></tr></table></figure>
 <hr>
 <p>当然还可以给 Testschema 添加方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Testschema.methods.say = function() &#123;&#10;  var name = this.name&#10;    ? &#34;My name is &#34; + this.name&#10;    : &#34;I don&#39;t know my name.&#34;;&#10;  console.log(name);&#10;&#125;&#10;&#10;var Test= mongoose.model(&#39;Test&#39;, Testschema);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Testschema.methods.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="keyword">this</span>.name</span><br><span class="line">    ? <span class="string">"My name is "</span> + <span class="keyword">this</span>.name</span><br><span class="line">    : <span class="string">"I don't know my name."</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Test= mongoose.model(<span class="string">'Test'</span>, Testschema);</span><br></pre></td></tr></table></figure>
 <p>然后再试试实例化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var test = new Test(&#123;name : &#39;minary&#39;&#125;);&#10;test.say(); //My name is minary&#10;&#10;var test0 = new Test(&#123;&#125;);&#10;test0.say(); //I don&#39;t know my name.</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">test</span> = new <span class="keyword">Test</span>(&#123;name : 'minary'&#125;);</span><br><span class="line"><span class="keyword">test</span>.say(); <span class="comment">//My name is minary</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test0 = new <span class="keyword">Test</span>(&#123;&#125;);</span><br><span class="line">test0.say(); <span class="comment">//I don't know my name.</span></span><br></pre></td></tr></table></figure>
 <hr>
 <p>咦，怎么还没涉及到任何 MongDB 的操作！别急！任何实例都可以直接用 <code>save</code> 方法来存到数据库里。第一个回调回来的参数为 <code>ERROR</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test.save(function(err, data)&#123;&#10;  if(err) return console.error(err);&#9;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">test</span>.<span class="keyword">save</span>(function(<span class="keyword">err</span>, data)&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">err</span>) <span class="keyword">return</span> console.<span class="keyword">error</span>(<span class="keyword">err</span>);	</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>可以去数据库看一下哦0. 0，已经有了一个 <code>tests</code> 表和 <code>name</code> 为 ‘minary’ 的数据了：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5461f6d380f9d3435bd2ed9d Tue, 11 Nov 2014 11:45:23 GMT</span><br><span class="line">&#123;</span><br><span class="line">    name: "minary",</span><br><span class="line">    _id: ObjectId("5461f6d380f9d3435bd2ed9d"),</span><br><span class="line">    __v: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>为什么会有 <code>tests</code> 这张表呢？你可以再加一条下面的代码试试就知道了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Test0= mongoose.model(&#39;Test0&#39;, Testschema);&#10;var test0 = new Test0(&#123;name : &#39;@v@&#39;&#125;);&#10;test0.save(function(err, data)&#123;&#10;  if(err) return console.error(err);    &#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Test0= mongoose.model(<span class="string">'Test0'</span>, Testschema);</span><br><span class="line"><span class="keyword">var</span> test0 = <span class="keyword">new</span> Test0(&#123;name : <span class="string">'@v@'</span>&#125;);</span><br><span class="line">test0.save(<span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <hr>
 <p>我们可以通过 Test 来访问所有的记录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;Test.find(function(err, data) &#123;&#10;  if(err) return console.error(err);    &#10;  console.log(data);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">Test</span>.find(function(<span class="keyword">err</span>, data) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">err</span>) <span class="keyword">return</span> console.<span class="keyword">error</span>(<span class="keyword">err</span>);    </span><br><span class="line">  console.<span class="literal">log</span>(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <hr>
 <p>上面只是把所有的记录都输出来了，那么如果我们要通过 <code>name</code> 来查询对应的记录呢！<br>Mongoose 支持 <a href="http://mongoosejs.com/docs/queries.html" target="_blank" rel="external">MongoDBs</a> 里丰富的语法。</p>
 <p>像我们现在要查询 <code>name</code> 开头为 ‘min’ 的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Test.find(&#123;name: /^min/&#125;, function(err, data) &#123;&#10;  if(err) return console.error(err);    &#10;  console.log(data);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Test.find(&#123;<span class="keyword">name</span>: /^<span class="built_in">min</span>/&#125;, <span class="function"><span class="keyword">function</span><span class="params">(err, data)</span></span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> console.error(err);    </span><br><span class="line">  console.<span class="built_in">log</span>(<span class="type">data</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="Congratulations">Congratulations</h3><p>快速入门什么的也就结束了， 我们创建一个 schema ， 添加自定义方法，通过 Mongoose 保存和查询 MongoDB 的数据。</p>
 <p>这里有更详细的 <a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">guide</a> 和 <a href="http://mongoosejs.com/docs/api.html" target="_blank" rel="external">API docs    </a> .</p>
 <h3 id="link">link</h3><p><a href="http://mongoosejs.com/docs/index.html" target="_blank" rel="external">http://mongoosejs.com/docs/index.html</a></p>
 
-            
-            <section class="comment">
-	<div class="ds-thread"></div>
-</section>
 
+			
+            <section class="comment">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2014/11/11/mongoose-快速入门/" data-title="mongoose 快速入门" data-url="http://f10.moe/2014/11/11/mongoose-快速入门/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-  var duoshuoQuery = {short_name:"f10"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+var duoshuoQuery = {short_name:"f10"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
         </div>
     </div>
 </article>
@@ -170,7 +172,12 @@ By <a href="http://f10.moe" title="Minary">Minary</a>
         Minary —— <small>(　･ิω･ิ)ノิ  ╰(*°▽°*)╯ (❁´▽`❁)</small>
     </div>
         <small>该博客由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动，搭载 <a href="https://github.com/XadillaX/hexadillax" target="_blank">Hexadillax</a> 主题</small><br />
-        <small>&copy; 2014 XadillaX</small>
+        <small>&copy; 2014 Minary</small>
     </footer>
+
+    
+
+
 </body>
 </html>
+
